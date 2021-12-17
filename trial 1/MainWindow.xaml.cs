@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO.Ports;
 using System.Windows.Threading;
+using System.Drawing;
+using System.IO;
 
 namespace trial_1
 {
@@ -39,6 +41,7 @@ namespace trial_1
         public long x_save_position;
         public long x_touch_position;
         public string messageboxtext;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -496,7 +499,7 @@ namespace trial_1
 
         private void Button_Click_9(object sender, RoutedEventArgs e)
         {
-            resetpostion();
+            
         }
 
         private void Button_Click_10(object sender, RoutedEventArgs e)
@@ -604,9 +607,9 @@ namespace trial_1
              x_save_position = Convert.ToInt16(Convert.ToDouble(dCurrPosi));
         }
 
-        private void Button_Click_13(object sender, RoutedEventArgs e)
+        public void Button_Click_13(object sender, RoutedEventArgs e)
         {
-            x_touch_position = Convert.ToInt16(Convert.ToDouble(dCurrPosi));
+           
         }
 
         private void Button_Click_14(object sender, RoutedEventArgs e)
@@ -623,6 +626,195 @@ namespace trial_1
            
             BlnBusy = false;
            
+        }
+
+
+         public void Movement_x()
+        {
+            
+
+
+
+
+                long lStep;
+                long lstep1;
+                string s;
+
+
+                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                lstep1 = lStep;
+                if (lstep1 > 0)
+                    s = "+" + lStep.ToString();
+                else
+                    s = lstep1.ToString();
+
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+
+
+
+                SendCommand("X" + s + "\r");   //Move X axis to the appointed position.
+
+                // timer1.IsEnabled = true;
+                Delay(1000);
+                BlnBusy = false;
+                //  timer1.IsEnabled = false;
+
+            
+            
+
+
+
+
+
+        }
+
+        public void Movement_y()
+        {
+            
+
+
+
+
+                long lStep;
+                long lstep1;
+                string s;
+
+
+                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                lstep1 = lStep;
+                if (lstep1 > 0)
+                    s = "+" + lStep.ToString();
+                else
+                    s = lstep1.ToString();
+
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+
+
+
+                SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
+
+                // timer1.IsEnabled = true;
+                Delay(1000);
+                BlnBusy = false;
+                //  timer1.IsEnabled = false;
+
+            
+
+
+
+
+
+
+        }
+
+        public void Movement_minusy()
+        {
+            
+
+
+
+
+                long lStep;
+                long lstep1;
+                string s;
+
+
+                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                lstep1 = lStep;
+                if (lstep1 > 0)
+                    s = "-" + lStep.ToString();
+                else
+                    s = lstep1.ToString();
+
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+
+
+
+                SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
+
+                // timer1.IsEnabled = true;
+                Delay(1000);
+                BlnBusy = false;
+                //  timer1.IsEnabled = false;
+
+
+
+
+
+
+        }
+        public void Movement_z()
+        {
+
+
+
+
+
+            long lStep;
+            long lstep1;
+            string s;
+
+
+            lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+            lstep1 = lStep;
+            if (lstep1 > 0)
+                s = "+" + lStep.ToString();
+            else
+                s = lstep1.ToString();
+
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = true;
+
+
+
+            SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
+
+            // timer1.IsEnabled = true;
+            Delay(1000);
+            BlnBusy = false;
+            //  timer1.IsEnabled = false;
+
+
+
+
+
+
+
+
+        }
+
+        private void pointing_Click(object sender, RoutedEventArgs e)
+        {
+            int y;
+            for (y = 0; y < 5; y++)
+            {
+                Movement_z();
+                Delay(500);
+                int x;
+                for (x = 0; x < 5; x++)
+                {
+
+                    Movement_x();
+                    Delay(500);
+
+                    Movement_y();
+                    Delay(500);
+                    Movement_minusy();
+                    Delay(500);
+                }
+            }
+        }
+
+        private void TextBox_TextChanged_3(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
