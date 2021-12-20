@@ -619,7 +619,11 @@ namespace trial_1
             BlnBusy = true;
             BlnSet = true;
             SendCommand("HX0\r");   //Home X axis
-
+            Delay(3000);
+            SendCommand("HY0\r");   //home Y axis
+            Delay(3000);
+            SendCommand("HZ0\r");   //home Z axis
+            Delay(3000);
             
             
             Delay(1000000);
@@ -641,7 +645,7 @@ namespace trial_1
                 string s;
 
 
-                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                lStep = Convert.ToInt16((Convert.ToDouble(distance_between_dots_in_X_direction.Text)) / DblPulseEqui);
                 lstep1 = lStep;
                 if (lstep1 > 0)
                     s = "+" + lStep.ToString();
@@ -682,7 +686,7 @@ namespace trial_1
                 string s;
 
 
-                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                -lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
                 lstep1 = lStep;
                 if (lstep1 > 0)
                     s = "+" + lStep.ToString();
@@ -749,6 +753,46 @@ namespace trial_1
 
 
         }
+
+        public void Movement_minusx()
+        {
+
+
+            int c;
+
+
+            long lStep;
+            long lstep1;
+            string s;
+            c = Convert.ToInt16(Convert.ToDouble(number_of_dots_X_direction.Text));
+
+
+            lStep = Convert.ToInt16((Convert.ToDouble(distance_between_dots_in_X_direction.Text)*c) / DblPulseEqui);
+            lstep1 = lStep;
+            if (lstep1 > 0)
+                s = "-" + lStep.ToString();
+            else
+                s = lstep1.ToString();
+
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = true;
+
+
+
+            SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
+
+            // timer1.IsEnabled = true;
+            Delay(1000);
+            BlnBusy = false;
+            //  timer1.IsEnabled = false;
+
+
+
+
+
+
+        }
         public void Movement_z()
         {
 
@@ -761,7 +805,7 @@ namespace trial_1
             string s;
 
 
-            lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+            lStep = Convert.ToInt16((Convert.ToDouble(distance_between_dots_in_Y_direction.Text)) / DblPulseEqui);
             lstep1 = lStep;
             if (lstep1 > 0)
                 s = "+" + lStep.ToString();
@@ -793,22 +837,34 @@ namespace trial_1
         private void pointing_Click(object sender, RoutedEventArgs e)
         {
             int y;
-            for (y = 0; y < 5; y++)
+            int a, b, c, d;
+           
+            b = Convert.ToInt16(Convert.ToDouble(number_of_dots_in_Y_direction.Text));
+             a = Convert.ToInt16(Convert.ToDouble(distance_between_dots_in_Y_direction.Text));
+            c = Convert.ToInt16(Convert.ToDouble(number_of_dots_X_direction.Text));
+            
+            for (y = 0; y < b; y++)
             {
                 Movement_z();
                 Delay(500);
                 int x;
-                for (x = 0; x < 5; x++)
+                // number of dots
+                for (x = 0; x < c; x++)
                 {
-
+                    // distance between dots
                     Movement_x();
-                    Delay(500);
+                    Delay(1000);
 
                     Movement_y();
                     Delay(500);
                     Movement_minusy();
                     Delay(500);
                 }
+                // come to first of next line
+                Movement_minusx();
+                Delay(500);
+
+
             }
         }
 
