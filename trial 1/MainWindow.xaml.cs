@@ -458,7 +458,7 @@ namespace trial_1
             BlnBusy = false;
             //  timer1.IsEnabled = false;
             resetpostion();
-            inquire_current_position();
+            inquire_current_position_X();
         }
 
         private void connection_textbox_TextChanged_1(object sender, TextChangedEventArgs e)
@@ -560,11 +560,13 @@ namespace trial_1
 
         private void Button_Click_11(object sender, RoutedEventArgs e)
         {
-            inquire_current_position();
+            inquire_current_position_X();
+            inquire_current_position_Y();
+            inquire_current_position_Z();
         }
 
 
-        public void inquire_current_position()
+        public void inquire_current_position_X()
         {
             StrReceiver = "";
             BlnBusy = true;
@@ -595,6 +597,69 @@ namespace trial_1
             textbox7.Text = dCurrPosi.ToString();
         }
 
+
+
+        public void inquire_current_position_Y()
+        {
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = false;
+            SendCommand("?Y\r");            //Inquiry the current position of X axis
+            Delay(100000);
+            BlnBusy = false;
+
+            if (StrReceiver != "")
+            {
+                try
+                {
+
+
+                    if (StrReceiver.Substring(5, 1) == "-")
+                        lCurrStep = -Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                    else
+                        lCurrStep = Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                }
+                catch
+                {
+                    MessageBox.Show("failed to connect");
+                }
+            }
+            else
+                return;
+            dCurrPosi = lCurrStep * DblPulseEqui;
+            textbox8.Text = dCurrPosi.ToString();
+        }
+
+        public void inquire_current_position_Z()
+        {
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = false;
+            SendCommand("?Z\r");            //Inquiry the current position of X axis
+            Delay(100000);
+            BlnBusy = false;
+
+            if (StrReceiver != "")
+            {
+                try
+                {
+
+
+                    if (StrReceiver.Substring(5, 1) == "-")
+                        lCurrStep = -Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                    else
+                        lCurrStep = Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                }
+                catch
+                {
+                    MessageBox.Show("failed to connect");
+                }
+            }
+            else
+                return;
+            dCurrPosi = lCurrStep * DblPulseEqui;
+            textbox9.Text = dCurrPosi.ToString();
+        }
 
 
         private void textbox7_TextChanged(object sender, TextChangedEventArgs e)
@@ -629,6 +694,7 @@ namespace trial_1
             Delay(1000000);
            
             BlnBusy = false;
+
            
         }
 
@@ -860,9 +926,13 @@ namespace trial_1
                     Movement_minusy();
                     Delay(500);
                 }
+
                 // come to first of next line
                 Movement_minusx();
                 Delay(500);
+                inquire_current_position_X();
+                inquire_current_position_Y();
+                inquire_current_position_Z();
 
 
             }

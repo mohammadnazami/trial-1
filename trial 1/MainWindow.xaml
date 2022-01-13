@@ -188,7 +188,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="- X" Grid.Column="0" FontSize="24" VerticalAlignment="Center" />
-                        <Button Content="Left"  Style="{StaticResource buttonarrow}"  Click="Button_Click_6" Grid.ColumnSpan="2" Margin="35,0,0,0"  />
+                        <Button Content="Left"  Style="{StaticResource buttonarrow}"  Click="Button_Click_6" Grid.ColumnSpan="2" Margin="34,0,0,0"  />
                         <Button Content="right" HorizontalContentAlignment="Right" Style="{StaticResource buttonarrow1}"  Grid.Column="3"  Click="Button_Click_6" Grid.ColumnSpan="2" Margin="0,0,30,0"  />
                         <TextBlock Text="X" Grid.Column="4" FontSize="24"  VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="31,60,25,61"  />
                         <TextBox Height="32"  Grid.Column="2" Name="torun_textbox" TextChanged="torun_textbox_TextChanged" />
@@ -255,7 +255,7 @@
 
 
                         </Grid.ColumnDefinitions>
-                        <Button Content="Printing" FontSize="12" Grid.Column="0" Name="pointing" Click="pointing_Click" Height="20" VerticalAlignment="Top"    />
+                        <Button Content="Printing" FontSize="12" Grid.Column="0" Name="pointing" Click="pointing_Click"    />
                         <!-- number of dots in x direction-->
                         <TextBox Grid.Column="2" Name="number_of_dots_X_direction"   />
                         <!-- distance between dots-->
