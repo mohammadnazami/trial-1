@@ -621,7 +621,7 @@ namespace trial_1
             SendCommand("HX0\r");   //Home X axis
             Delay(3000);
             SendCommand("HY0\r");   //home Y axis
-            Delay(3000);
+            Delay(6000);
             SendCommand("HZ0\r");   //home Z axis
             Delay(3000);
             
@@ -686,7 +686,7 @@ namespace trial_1
                 string s;
 
 
-                -lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
                 lstep1 = lStep;
                 if (lstep1 > 0)
                     s = "+" + lStep.ToString();
