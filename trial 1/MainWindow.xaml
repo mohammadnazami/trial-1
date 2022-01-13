@@ -5,17 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:trial_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1100" Width="1700" Loaded="Window_Loaded" ResizeMode="CanResizeWithGrip" WindowState="Maximized" >
+        Title="MainWindow" Height="950" Width="1200" MinHeight="800" MinWidth="1100" Loaded="Window_Loaded" ResizeMode="CanResizeWithGrip" WindowState="Maximized" >
     <StackPanel>
-        <Grid>
+        <Grid >
             <!-- devide page to two part-->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="463*" />
+                <ColumnDefinition Width="22*" />
+                <ColumnDefinition Width="907*"/>
             </Grid.ColumnDefinitions>
 
             <!-- setting part -->
-            <StackPanel Grid.Column="0">
+            <StackPanel Grid.Column="0"   VerticalAlignment="Top" >
 
 
                 <StackPanel  Background="LightGray"  >
@@ -30,7 +31,7 @@
 
 
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="  Stage" Grid.Column="0" FontSize="36"   />
+                        <TextBlock Text="  Stage" Grid.Column="0" FontSize="30"   />
                         <TextBlock Text=" Port: " Grid.Column="1" FontSize="28" VerticalAlignment="Center"  Width="60"   />
                         <Button Content="connnect" Style="{StaticResource button2}" Grid.Column="3" Name="connect" Click="connect_Click"  Margin="0"  />
                         <Button Content="disconnect" Style="{StaticResource button2}" Name="disconnect" Click="disconnect_Click" Grid.Column="4" Background="LightSalmon"   />
@@ -45,7 +46,7 @@
                         <TextBlock Text="Status" FontSize="30" TextAlignment="Center" />
                         <TextBox Grid.Column="1" Name="connection_textbox" TextChanged="connection_textbox_TextChanged_1" FontSize="12" TextAlignment="Center" Background="LightGray"  />
                     </Grid>
-                   
+
 
                     <TextBlock Text="  Current Postion" FontSize="36" />
                     <Grid>
@@ -56,8 +57,8 @@
                         <TextBlock Grid.Column="0" Text="   X:" FontSize="36" />
                         <TextBox Grid.Column="1" x:Name="textbox7" TextChanged="textbox7_TextChanged"   />
                     </Grid>
-                   
-                   
+
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -66,7 +67,7 @@
                         <TextBlock Grid.Column="0" Text="   Y:" FontSize="36" />
                         <TextBox x:Name="textbox8" Grid.Column="1" />
                     </Grid>
-                   
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -85,8 +86,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Step Size (in &#956;m)" Grid.Column="0" HorizontalAlignment="Center" Margin="37,0,57,0" FontSize="24" Width="188" />
-                        <TextBlock Text="Speed (in &#956;m/sec)" Grid.Column="1" HorizontalAlignment="Center" FontSize="24" Margin="40,0,0,0" Width="242" />
+                        <TextBlock Text="Step Size (in &#956;m)" Grid.Column="0" HorizontalAlignment="Center" FontSize="24" />
+                        <TextBlock Text="Speed (in &#956;m/sec)" Grid.Column="1" HorizontalAlignment="Center" FontSize="24"   />
                     </Grid>
 
                     <Grid  >
@@ -136,8 +137,8 @@
                                 </TransformGroup>
                             </Button.RenderTransform>
                         </Button>
-                        <TextBox Name="speedshow" Text="0" Grid.Column="0" Margin="84,6,91,6" />
-                        <TextBox Name="stepvalueshow" Text="0" Grid.Column="2" Margin="83,6,50,6"  />
+                        <TextBox Name="speedshow" Text="0" Grid.Column="0" TextAlignment="Center" FontSize="20" />
+                        <TextBox Name="stepvalueshow" Text="0" Grid.Column="2" TextAlignment="Center" FontSize="20"  />
                     </Grid>
 
                     <Grid >
@@ -159,7 +160,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Y" Grid.Column="0" HorizontalAlignment="Center" FontSize="24" Margin="184,0,74,0" Width="24"  />
+                        <TextBlock Text="Y" Grid.Column="0" HorizontalAlignment="Center" FontSize="24"   />
                         <TextBlock Text="Z" Grid.Column="1" HorizontalAlignment="Center" FontSize="24" />
 
                     </Grid>
@@ -172,7 +173,7 @@
 
                         </Grid.ColumnDefinitions>
 
-                        <Button Content="Far" Style="{StaticResource buttonarrow4}" Grid.Column="0" HorizontalAlignment="Center" Margin="126,0,0,0" Width="156" Click="Button_Click_3"  />
+                        <Button Content="Far" Style="{StaticResource buttonarrow4}" Grid.Column="0" HorizontalAlignment="Right"  Width="156" Click="Button_Click_3"  />
                         <Button Content="Up" Grid.Column="1" Style="{StaticResource buttonarrow4}" HorizontalAlignment="Center" Click="Button_Click_5" />
 
                     </Grid>
@@ -186,11 +187,11 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="- X" Grid.Column="0" FontSize="24" VerticalAlignment="Center" Margin="0,60,49,61"  />
-                        <Button Content="Left" HorizontalContentAlignment="Right" Style="{StaticResource buttonarrow}" Grid.ColumnSpan="2" Margin="58,1,28.5,-1" Click="Button_Click_6"  />
-                        <Button Content="right" HorizontalContentAlignment="Right" Style="{StaticResource buttonarrow1}"  Grid.Column="3"  Click="Button_Click_6" Grid.ColumnSpan="2" Margin="24.5,1,56.5,-1"  />
-                        <TextBlock Text="X" Grid.Column="4" FontSize="24"  VerticalAlignment="Center" Margin="24,60,33,61" />
-                        <TextBox Height="32" Width="80" Grid.Column="2" Name="torun_textbox" TextChanged="torun_textbox_TextChanged" />
+                        <TextBlock Text="- X" Grid.Column="0" FontSize="24" VerticalAlignment="Center" />
+                        <Button Content="Left"  Style="{StaticResource buttonarrow}"  Click="Button_Click_6" Grid.ColumnSpan="2" Margin="35,0,0,0"  />
+                        <Button Content="right" HorizontalContentAlignment="Right" Style="{StaticResource buttonarrow1}"  Grid.Column="3"  Click="Button_Click_6" Grid.ColumnSpan="2" Margin="0,0,30,0"  />
+                        <TextBlock Text="X" Grid.Column="4" FontSize="24"  VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="31,60,25,61"  />
+                        <TextBox Height="32"  Grid.Column="2" Name="torun_textbox" TextChanged="torun_textbox_TextChanged" />
 
                     </Grid>
                     <Grid >
@@ -201,7 +202,7 @@
 
 
                         </Grid.ColumnDefinitions>
-                        <Button Content="Down" Grid.Column="1" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click_8" />
+                        <Button Content="Down" Grid.Column="1" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click_8"  />
                         <Button Content="near" Grid.Column="0" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Right"  VerticalAlignment="Top" Click="Button_Click_4" />
 
 
@@ -215,7 +216,7 @@
 
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="- Y" Grid.Column="0" HorizontalAlignment="Center" FontSize="24" Margin="176,0,66,0" Width="40" />
+                        <TextBlock Text="- Y" Grid.Column="0" HorizontalAlignment="Center" FontSize="24" />
                         <TextBlock Text="- Z" Grid.Column="1" HorizontalAlignment="Center" FontSize="24" />
 
                     </Grid>
@@ -231,7 +232,7 @@
 
 
                         </Grid.ColumnDefinitions>
-                     
+
                         <!-- number of dots  -->
                         <TextBox Grid.Column="2" Name="number_of_dots_in_Y_direction" />
                         <!-- distance between dots-->
@@ -248,7 +249,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-                            
+
 
 
 
@@ -279,7 +280,7 @@
 
 
             </StackPanel>
-            <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="1" Grid.ColumnSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -296,7 +297,7 @@
                     <Button Content="Position" Grid.Column="2" Background="LightSalmon" Height="32" VerticalAlignment="Bottom" Click="Button_Click_11" />
                     <Button Content="Home of motors XYZ"   Grid.Column="3" Click="Button_Click_14" />
                 </Grid>
-                <Rectangle Height="980" Stroke="Black" StrokeThickness="3" Margin="0,0,10,0"  >
+                <Rectangle Height="900" Stroke="Black" StrokeThickness="3"  >
                     <Rectangle.Fill>
                         <ImageBrush ImageSource="image/3.png" Stretch="Uniform"  />
                     </Rectangle.Fill>
