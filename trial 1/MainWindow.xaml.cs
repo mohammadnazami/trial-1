@@ -16,13 +16,20 @@ using System.IO.Ports;
 using System.Windows.Threading;
 using System.Drawing;
 using System.IO;
+using AForge.Video;
+using AForge.Video.DirectShow;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Threading;
+
+
 
 namespace trial_1
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
 
         public DispatcherTimer timer1;
@@ -274,9 +281,15 @@ namespace trial_1
             
             sSpeed = 200;
             timer1.Start();
+
+            #region camera intiation
+            // for camera
+            this.DataContext = this;
+            GetVideoDevices();
+            this.Closing += MainWindow_Closing;
+            // end for camera
+            #endregion camera intiation
         }
-
-
         private void Timer1_Tick(object sender, EventArgs e)
         {
            
@@ -701,11 +714,6 @@ namespace trial_1
 
          public void Movement_x()
         {
-            
-
-
-
-
                 long lStep;
                 long lstep1;
                 string s;
@@ -729,65 +737,33 @@ namespace trial_1
                 // timer1.IsEnabled = true;
                 Delay(1000);
                 BlnBusy = false;
-                //  timer1.IsEnabled = false;
-
-            
-            
-
-
-
-
-
+                //  timer1.IsEnabled = false
         }
 
         public void Movement_y()
         {
-            
-
-
-
-
                 long lStep;
                 long lstep1;
                 string s;
-
-
                 lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
                 lstep1 = lStep;
                 if (lstep1 > 0)
                     s = "+" + lStep.ToString();
                 else
                     s = lstep1.ToString();
-
                 StrReceiver = "";
                 BlnBusy = true;
                 BlnSet = true;
-
-
-
                 SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
 
                 // timer1.IsEnabled = true;
                 Delay(1000);
                 BlnBusy = false;
                 //  timer1.IsEnabled = false;
-
-            
-
-
-
-
-
-
         }
 
         public void Movement_minusy()
         {
-            
-
-
-
-
                 long lStep;
                 long lstep1;
                 string s;
@@ -803,36 +779,21 @@ namespace trial_1
                 StrReceiver = "";
                 BlnBusy = true;
                 BlnSet = true;
-
-
-
                 SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
 
                 // timer1.IsEnabled = true;
                 Delay(1000);
                 BlnBusy = false;
                 //  timer1.IsEnabled = false;
-
-
-
-
-
-
         }
 
         public void Movement_minusx()
         {
-
-
             int c;
-
-
             long lStep;
             long lstep1;
             string s;
             c = Convert.ToInt16(Convert.ToDouble(number_of_dots_X_direction.Text));
-
-
             lStep = Convert.ToInt16((Convert.ToDouble(distance_between_dots_in_X_direction.Text)*c) / DblPulseEqui);
             lstep1 = lStep;
             if (lstep1 > 0)
@@ -843,34 +804,18 @@ namespace trial_1
             StrReceiver = "";
             BlnBusy = true;
             BlnSet = true;
-
-
-
             SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
 
             // timer1.IsEnabled = true;
             Delay(1000);
             BlnBusy = false;
             //  timer1.IsEnabled = false;
-
-
-
-
-
-
         }
         public void Movement_z()
         {
-
-
-
-
-
             long lStep;
             long lstep1;
             string s;
-
-
             lStep = Convert.ToInt16((Convert.ToDouble(distance_between_dots_in_Y_direction.Text)) / DblPulseEqui);
             lstep1 = lStep;
             if (lstep1 > 0)
@@ -881,23 +826,11 @@ namespace trial_1
             StrReceiver = "";
             BlnBusy = true;
             BlnSet = true;
-
-
-
             SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
-
             // timer1.IsEnabled = true;
             Delay(1000);
             BlnBusy = false;
             //  timer1.IsEnabled = false;
-
-
-
-
-
-
-
-
         }
 
         private void pointing_Click(object sender, RoutedEventArgs e)
@@ -933,14 +866,121 @@ namespace trial_1
                 inquire_current_position_X();
                 inquire_current_position_Y();
                 inquire_current_position_Z();
-
-
             }
         }
-
         private void TextBox_TextChanged_3(object sender, TextChangedEventArgs e)
         {
 
         }
+        #region camera
+        // camera
+        #region Public properties
+
+        public ObservableCollection<FilterInfo> VideoDevices { get; set; }
+
+        public FilterInfo CurrentDevice
+        {
+            get { return _currentDevice; }
+            set { _currentDevice = value; this.OnPropertyChanged("CurrentDevice"); }
+        }
+        private FilterInfo _currentDevice;
+
+        #endregion
+
+
+        #region Private fields
+
+        private IVideoSource _videoSource;
+
+        #endregion
+
+
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            StopCamera();
+        }
+
+        private void btnStart_Click(object sender, RoutedEventArgs e)
+        {
+            StartCamera();
+        }
+
+        private void video_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
+        {
+            try
+            {
+                BitmapImage bi;
+                using (var bitmap = (Bitmap)eventArgs.Frame.Clone())
+                {
+                    bi = bitmap.ToBitmapImage();
+                }
+                bi.Freeze(); // avoid cross thread operations and prevents leaks
+                Dispatcher.BeginInvoke(new ThreadStart(delegate { videoPlayer.Source = bi; }));
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error on _videoSource_NewFrame:\n" + exc.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                StopCamera();
+            }
+        }
+
+        private void btnStop_Click(object sender, RoutedEventArgs e)
+        {
+            StopCamera();
+        }
+
+        private void GetVideoDevices()
+        {
+            VideoDevices = new ObservableCollection<FilterInfo>();
+            foreach (FilterInfo filterInfo in new FilterInfoCollection(FilterCategory.VideoInputDevice))
+            {
+                VideoDevices.Add(filterInfo);
+            }
+            if (VideoDevices.Any())
+            {
+                CurrentDevice = VideoDevices[0];
+            }
+            else
+            {
+                MessageBox.Show("No video sources found", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void StartCamera()
+        {
+            if (CurrentDevice != null)
+            {
+                _videoSource = new VideoCaptureDevice(CurrentDevice.MonikerString);
+                _videoSource.NewFrame += video_NewFrame;
+                _videoSource.Start();
+            }
+        }
+
+        private void StopCamera()
+        {
+            if (_videoSource != null && _videoSource.IsRunning)
+            {
+                _videoSource.SignalToStop();
+                _videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
+            }
+        }
+
+        #region INotifyPropertyChanged members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+            {
+                var e = new PropertyChangedEventArgs(propertyName);
+                handler(this, e);
+            }
+        }
+        #endregion
+        // end camera
+        #endregion camera
     }
 }

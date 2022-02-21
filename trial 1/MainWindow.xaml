@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:trial_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="950" Width="1200" MinHeight="800" MinWidth="1100" Loaded="Window_Loaded" ResizeMode="CanResizeWithGrip" WindowState="Maximized" >
+        Title="MainWindow" Height="900" Width="1200" MinHeight="800" MinWidth="1100" Loaded="Window_Loaded" ResizeMode="CanResizeWithGrip" WindowState="Normal" >
     <StackPanel>
         <Grid >
             <!-- devide page to two part-->
@@ -265,14 +265,15 @@
                         <TextBlock Text="number of dots in Y direction " Grid.Column="1" FontSize="8" />
 
                     </Grid>
+                   
+                    
+                    
 
 
 
 
                 </StackPanel>
-                <StackPanel>
-
-                </StackPanel>
+              
 
 
 
@@ -289,19 +290,46 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                      
+                      
 
 
 
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Camera " Grid.Column="1" FontSize="24" />
-                    <Button Content="Position" Grid.Column="2" Background="LightSalmon" Height="32" VerticalAlignment="Bottom" Click="Button_Click_11" />
-                    <Button Content="Home of motors XYZ"   Grid.Column="3" Click="Button_Click_14" />
+                    <TextBlock Text="Camera " Grid.Column="0" FontSize="24" />
+                    <Button Content="Position" Grid.Column="1" Background="LightSalmon" Height="32" VerticalAlignment="Top" Click="Button_Click_11" />
+                    <Button Content="Home of motors XYZ"   Grid.Column="2" Click="Button_Click_14" />
+                    <ComboBox x:Name="comboBox"
+                  Width="167"
+                  Height="21"
+                  Margin="10,0,0,25"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  DisplayMemberPath="Name"
+                  ItemsSource="{Binding VideoDevices}"
+                  SelectedItem="{Binding CurrentDevice}" Grid.Column="4" />
+                    <Label Width="167"
+               Height="24"
+               Margin="10,0,0,46"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Content="Select video source" Grid.Column="3" />
+                    <Button 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="btnStart_Click"
+                Content="Start" Grid.Column="7" />
+                    <Button 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="btnStop_Click"
+                Content="Stop" Grid.Column="5" />
                 </Grid>
-                <Rectangle Height="881" Stroke="Black" StrokeThickness="3"  >
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="image/3.png" Stretch="Uniform"  />
-                    </Rectangle.Fill>
-                </Rectangle>
+                
+                <Image x:Name="videoPlayer" Height="600"  />
+                
 
 
             </StackPanel>
