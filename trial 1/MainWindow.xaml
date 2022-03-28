@@ -200,17 +200,24 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+
 
 
 
                         </Grid.ColumnDefinitions>
 
                         <Button Content="save position" Grid.Column="0"  HorizontalAlignment="Center"  Width="150" Height="50" Click="Button_Click_9"   />
-                        <Button Content="touch position" Grid.Column="1"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="150" Height="50" Click="Button_Click_10"  />
+                        <Button Content="touch position" Grid.Column="2"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="150" Height="50" Click="Button_Click_10"  />
+                        <TextBox  Grid.Column="1" Name="distance_between_dots_in_X_direction"        />
+                        <TextBox  Grid.Column="3" Name="distance_between_dots_in_Y_direction"        />
 
                     </Grid>
                     <Grid Margin="10,10" >
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
 
@@ -218,8 +225,10 @@
 
                         </Grid.ColumnDefinitions>
 
-                        <Button Content="set save position" Grid.Column="0"  HorizontalAlignment="Center"  Width="152" Height="50" Margin="55,0,65,0" Click="Button_Click_12"    />
-                        <Button Content="set touch position" Grid.Column="1"  HorizontalAlignment="Center"  VerticalAlignment="Top" Width="155" Height="50" Margin="61,0,56,0" Click="Button_Click_13"   />
+                        <Button Content="set save position" Grid.Column="0"    Click="Button_Click_12"    />
+                        <Button Content="set touch position" Grid.Column="2"  Click="Button_Click_13"   />
+                        <TextBox  Grid.Column="1" Name="number_of_dots_in_Y_direction"        />
+                        <TextBox  Grid.Column="3" Name="number_of_dots_X_direction"        />
 
                     </Grid>
 
