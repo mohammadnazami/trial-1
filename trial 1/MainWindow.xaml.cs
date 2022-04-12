@@ -624,5 +624,25 @@ namespace trial_1
             BlnBusy = false;
            
         }
+
+        private void Button_Click_15(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_16(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_17(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_18(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
