@@ -272,6 +272,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+
                         </Grid.ColumnDefinitions>
 
                         <!--text of minus Y-->
@@ -279,6 +280,23 @@
 
                         <!--text of minus Z-->
                         <TextBlock Text="- Z" Grid.Column="1" HorizontalAlignment="Center" FontSize="12" />
+
+
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                          
+                        </Grid.ColumnDefinitions>
+
+                        <Button Content="save position" Grid.Column="0"  Click="Button_Click_9" Height="20" VerticalAlignment="Top"   />
+                      <Button Content="touch position" Grid.Column="1"   Click="Button_Click_10"  />
+                      <TextBox  Grid.Column="2" Name="distance_between_dots_in_X_direction" />
+                      <TextBox  Grid.Column="3" Name="distance_between_dots_in_Y_direction" />
+ 
 
                     </Grid>
 
@@ -294,7 +312,11 @@
                         <Button Content="save position" Grid.Column="0"  HorizontalAlignment="Center"   Click="Button_Click_9"   />
 
                         <!--button for touch position -->
+
                         <Button Content="touch position" Grid.Column="1"  HorizontalAlignment="Center"  VerticalAlignment="Top"  Click="Button_Click_10"  />
+
+                        <Button Content="touch position"  HorizontalAlignment="Center"  VerticalAlignment="Top"  Click="Button_Click_10"  />
+
 
                     </Grid>
 
