@@ -166,7 +166,7 @@ VerticalScrollBarVisibility="Hidden"/>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Polygon x:Name="Polygon" Points= "0,76 76,152  76,0" Stroke="White" Fill="#92D14F" />
+                                <Polygon x:Name="Polygon" Points= "0,38 38,76  38,0" Stroke="White" Fill="#92D14F" />
                             </StackPanel>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
@@ -194,9 +194,9 @@ VerticalScrollBarVisibility="Hidden"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
+                        <Grid >
                             <StackPanel Orientation="Horizontal">
-                                <Polygon x:Name="Polygon" Points= "0,0 76,76  152,0" Stroke="White" Fill="#92D14F"  />
+                                <Polygon x:Name="Polygon" Points= "0,0 38,38  76,0" Stroke="White" Fill="#92D14F"  />
                             </StackPanel>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
@@ -225,7 +225,7 @@ VerticalScrollBarVisibility="Hidden"/>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Polygon x:Name="Polygon" Points= "0,0 76,76  0,152" Stroke="White"  Fill="#92D14F"  />
+                                <Polygon x:Name="Polygon" Points= "0,0 38,38  0,76" Stroke="White"  Fill="#92D14F"  />
                             </StackPanel>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
@@ -253,7 +253,7 @@ VerticalScrollBarVisibility="Hidden"/>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Polygon x:Name="Polygon" Points= "0,76 76,0  152,76" Stroke="White"  Fill="#92D14F "  />
+                                <Polygon x:Name="Polygon" Points= "0,38 38,0  76,38" Stroke="White"  Fill="#92D14F "  />
                             </StackPanel>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
