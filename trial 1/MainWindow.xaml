@@ -30,51 +30,51 @@
 
                         <!-- text of  stage -->
                         <TextBlock Text="Stage" Grid.Column="0" FontSize="24"   />
-                        
+
                         <!--text of port-->
                         <TextBlock Text=" Port:" Grid.Column="1" FontSize="20" VerticalAlignment="Center"    />
-                        
+
                         <!--textbox of port number -->
                         <TextBox Grid.Column="2" FontSize="12" TextAlignment="Center" Name="portnumber" Background="LightGray" />
 
                         <!--button for connection-->
                         <Button Content="connnect" Style="{StaticResource button2}" Grid.Column="3" Name="connect" Click="connect_Click" FontSize="12"   />
-                        
+
                         <!--button for disconnecting -->
                         <Button Content="disconnect" Style="{StaticResource button2}" Name="disconnect" Click="disconnect_Click" Grid.Column="4" Background="LightSalmon" FontSize="12"  />
                     </Grid>
-                    
-                    
+
+
                     <!--statue: connected or disconnected-->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--text of statue-->
                         <TextBlock Text="Status" FontSize="24" TextAlignment="Center" />
-                        
+
                         <!--textbox to show connected or disconnected-->
                         <TextBox Grid.Column="1" Name="connection_textbox" TextChanged="connection_textbox_TextChanged_1" FontSize="12" TextAlignment="Center" Background="LightGray"  />
                     </Grid>
-                    
+
 
                     <!--text for current postion-->
                     <TextBlock Text="  Current Postion" FontSize="24" />
-                    
-                    
+
+
                     <!-- postion of X axis with its textbox -->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            
+
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--text of x position-->
                         <TextBlock Text="X" FontSize="20" Grid.Column="0" HorizontalAlignment="Center" />
-                        
+
                         <!--current position as recieved from machine-->
                         <TextBox x:Name="textbox7" Grid.Column="1" TextChanged="textbox7_TextChanged"  />
                     </Grid>
@@ -85,13 +85,13 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--text for Y postion-->
                         <TextBlock Text="Y:" FontSize="20" Grid.Column="0" HorizontalAlignment="Center" />
-                        
+
                         <!--current position of Y axis as recieved from machine-->
                         <TextBox x:Name="textbox8" Grid.Column="1" />
-                        
+
                     </Grid>
 
                     <!-- postion of Z axis with its textbox -->
@@ -100,41 +100,41 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--text for Z postion-->
                         <TextBlock Text="Z" FontSize="20" Grid.Column="0" HorizontalAlignment="Center" />
-                        
+
                         <!--postion of Z axis as recieved from machine-->
                         <TextBox x:Name="textbox9" Grid.Column="1" />
                     </Grid>
-                    
+
 
 
                 </StackPanel>
-                
+
                 <!--part of moving motors-->
                 <StackPanel Grid.Column="1" Background="#f4b184"   >
-                    
+
                     <!--text for stage movement -->
                     <TextBlock Text="   Stage Movement" Grid.Column="0" FontSize="24"  />
-                    
+
                     <!--grid for speed and step size of motors-->
                     <Grid >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--text of resize-->
                         <TextBlock Text="Step Size (in &#956;m)" Grid.Column="0" HorizontalAlignment="Center"  FontSize="12"  />
-                        
+
                         <!--text of speed in micrometer-->
                         <TextBlock Text="Speed (in &#956;m/sec)" Grid.Column="1" HorizontalAlignment="Center" FontSize="12"  />
-                        
-                        
+
+
                     </Grid>
 
-                    
+
                     <!-- grid of step size and motor speed setting-->
                     <Grid  >
                         <Grid.ColumnDefinitions>
@@ -143,7 +143,7 @@
                             <ColumnDefinition Width="35*"/>
                             <ColumnDefinition Width="315*"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--step size-->
                         <DockPanel Grid.Column="1" >
                             <TextBox Text="{Binding ElementName=slValue, Path=Value, UpdateSourceTrigger=PropertyChanged}"  TextChanged="TextBox_TextChanged_1" Name="X_axis_stepsize" DockPanel.Dock="Right" TextAlignment="Right" Width="18"  />
@@ -152,7 +152,7 @@
                                 />
 
                         </DockPanel>
-                        
+
                         <!--speed setting-->
                         <DockPanel Grid.Column="8" >
                             <TextBox Text="{Binding ElementName=slValue1, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" TextChanged="TextBox_TextChanged_2" Width="25" Name="speedtextbox"  />
@@ -165,9 +165,9 @@
                                 </Slider.Background>
                             </Slider>
                         </DockPanel>
-                        
+
                     </Grid>
-                    
+
                     <!--show speed and size as per recieved from motors-->
                     <Grid >
                         <Grid.ColumnDefinitions>
@@ -175,25 +175,25 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <!---->
                         <Button Style="{StaticResource button2}" Content="ok" Click="Button_Click_2"  Grid.Column="1" VerticalAlignment="Top" />
 
 
                         <!-- value of step size as per recieved from machine-->
                         <TextBox Name="speedshow" Text="0" Grid.Column="2" TextAlignment="Center" />
-                        
+
                         <!--value of speed as per recieved -->
                         <TextBox Name="stepvalueshow" Text="0" Grid.Column="0" TextAlignment="Center"  />
                     </Grid>
 
                     <!-- stop button-->
-                        <Button Style="{StaticResource button2}" Content="stop" Name="stop" Click="stop_Click"  Grid.ColumnSpan="2"    />
-                   
+                    <Button Style="{StaticResource button2}" Content="stop" Name="stop" Click="stop_Click"  Grid.ColumnSpan="2"    />
+
                 </StackPanel>
-                
-                
-                
+
+
+
                 <!--moving xyz direction motors-->
                 <StackPanel Grid.Column="2"  Background="#FFF2CD" >
                     <Grid >
@@ -236,13 +236,13 @@
                         </Grid.ColumnDefinitions>
 
                         <!--text of minus X-->
-                        <TextBlock Text="-X" Grid.Column="0" FontSize="24" VerticalAlignment="Center" />
+                        <TextBlock Text="-X" Grid.Column="0" FontSize="12" VerticalAlignment="Center" />
 
                         <!--button for X direction-->
                         <Button Content="Left" Style="{StaticResource buttonarrow}"  Click="Button_Click_6" FontSize="12" Grid.Column="1"  />
 
                         <!--button for plus X -->
-                        <Button Content="Right" Grid.Column="3" Style="{StaticResource buttonarrow1}" Click="Button_Click_1"  FontSize="12" />
+                        <Button Content="Right" Grid.Column="3" Style="{StaticResource buttonarrow1}" Click="Button_Click_1"  FontSize="12" HorizontalAlignment="Right" Width="36" />
 
                         <!--text for puls X-->
                         <TextBlock Text="X" Grid.Column="4" FontSize="12"  VerticalAlignment="Center"  />
@@ -297,14 +297,14 @@
                         <Button Content="reset position" Grid.Column="0"  HorizontalAlignment="Center" Click="Button_Click_12"    />
 
                         <!--button for set touch position-->
-                        <Button Content="touch position" Grid.Column="1"  HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click_13"   />
+                        <Button Content="touch position" Grid.Column="1"  HorizontalAlignment="Center" Click="Button_Click_13" Margin="23,0"   />
                     </Grid>
 
 
 
                     <!--button for Printing -->
                     <Button Content="printing" Name="printing_dots" Click="printing_dots_Click" Margin="10,10" />
-                    
+
                     <!--grid for save position and touch position -->
                     <Grid >
                         <Grid.ColumnDefinitions>
@@ -312,7 +312,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-                           
+
                         </Grid.ColumnDefinitions>
 
 
@@ -320,15 +320,15 @@
                         <TextBlock Text="number of dots in X" Grid.Column="0" FontSize="8"   VerticalAlignment="Center"   />
 
                         <!--textbox for distance between dots in X direction-->
-                        <TextBox  Grid.Column="1" Name="distance_between_dots_in_X_direction"        />
+                        <TextBox  Grid.Column="1" Name="number_of_dots_in_X_direction" Height="18" VerticalAlignment="Top"       />
 
 
 
                         <!--button for touch position-->
                         <TextBlock Text="distance between dots in X direction" Grid.Column="2" FontSize="8" VerticalAlignment="Center" />
-                     
+
                         <!--distance between dots-->
-                        <TextBox  Grid.Column="3" Name="distance_between_dots_in_Y_direction" />
+                        <TextBox  Grid.Column="3" Name="distance_between_dots_in_X_direction" TextChanged="distance_between_dots_in_Y_direction_TextChanged" />
                     </Grid>
 
 
@@ -348,15 +348,15 @@
                         <TextBlock Text="number of dots in Y" Grid.Column="0" FontSize="8" VerticalAlignment="Center"  />
 
                         <!--textbox for Y distance between dots-->
-                        <TextBox  Grid.Column="1" Name="distance_between_dots_in_direction"        />
+                        <TextBox  Grid.Column="1" Name="number_of_dots_in_Y_direction" />
 
 
 
                         <!--button for touch position-->
-                        <TextBlock Text="distance between dots in Y direction" Grid.Column="2" FontSize="8" VerticalAlignment="Center"   />
+                        <TextBlock Text="distance between dots in Y direction" Grid.Column="2" FontSize="8"   />
 
                         <!--distance between dots-->
-                        <TextBox  Grid.Column="3" Name="distance_between_dots_inZ_direction" />
+                        <TextBox  Grid.Column="3" Name="distance_between_dots_in_Y_direction" />
                     </Grid>
 
 

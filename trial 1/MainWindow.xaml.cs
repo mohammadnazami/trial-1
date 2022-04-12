@@ -627,6 +627,52 @@ namespace trial_1
 
         private void printing_dots_Click(object sender, RoutedEventArgs e)
         {
+            double reseting_point = x_save_position;
+            double touching_point = x_touch_position;
+
+            int number_dot_X = Convert.ToInt16(number_of_dots_in_X_direction.Text);
+            int distance_between_dots_X = Convert.ToInt32(distance_between_dots_in_X_direction.Text);
+
+            double number_dots_Y = Convert.ToDouble(number_of_dots_in_Y_direction.Text);
+            double distance_dots_Y = Convert.ToDouble(distance_between_dots_in_Y_direction.Text);
+
+
+            int x;
+            for (x = 0; x > number_dot_X; x++)
+            {
+                sending(distance_between_dots_X);
+            }
+
+        }
+
+
+        public void sending(int moving_distance)
+        {
+            long lStep;
+            long lstep1;
+            string s;
+
+
+            lStep = Convert.ToInt32(moving_distance / DblPulseEqui);
+            lstep1 = lStep * +1;
+            if (lstep1 > 0)
+                s = "+" + lStep.ToString();
+            else
+                s = lstep1.ToString();
+
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = true;
+            SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
+
+            // timer1.IsEnabled = true;
+            Delay(1000);
+            BlnBusy = false;
+            //  timer1.IsEnabled = false;
+        }
+
+        private void distance_between_dots_in_Y_direction_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }
