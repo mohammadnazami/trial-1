@@ -218,11 +218,6 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-
-
-
                         </Grid.ColumnDefinitions>
 
                         <Button Content="set save position" Grid.Column="0"    Click="Button_Click_12"    />
@@ -232,6 +227,8 @@
 
                     </Grid>
 
+                        <!--button for touch position -->
+                        <Button Content="touch position" Grid.Column="1"  HorizontalAlignment="Center"  VerticalAlignment="Top"  Click="Button_Click_10"  />
 
 
 
