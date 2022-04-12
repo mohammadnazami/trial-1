@@ -35,7 +35,7 @@
                         <TextBlock Text=" Port:" Grid.Column="1" FontSize="20" VerticalAlignment="Center"    />
                         
                         <!--textbox of port number -->
-                        <TextBox Grid.Column="2" FontSize="36" TextAlignment="Center" Name="portnumber" Background="LightGray" />
+                        <TextBox Grid.Column="2" FontSize="12" TextAlignment="Center" Name="portnumber" Background="LightGray" />
 
                         <!--button for connection-->
                         <Button Content="connnect" Style="{StaticResource button2}" Grid.Column="3" Name="connect" Click="connect_Click" FontSize="12"   />
@@ -302,8 +302,9 @@
 
 
 
-                    <!--text for Printing -->
-                    <TextBlock Text="  Printing" Grid.Column="0" FontSize="24"  />
+                    <!--button for Printing -->
+                    <Button Content="printing" Name="printing_dots" Click="printing_dots_Click" Margin="10,10" />
+                    
                     <!--grid for save position and touch position -->
                     <Grid >
                         <Grid.ColumnDefinitions>
@@ -315,8 +316,8 @@
                         </Grid.ColumnDefinitions>
 
 
-                        <!--button for save position-->
-                        <Button Content="number of dots in X" Grid.Column="0" FontSize="6" Click="Button_Click_15"   />
+                        <!--text for number of dots-->
+                        <TextBlock Text="number of dots in X" Grid.Column="0" FontSize="8"   VerticalAlignment="Center"   />
 
                         <!--textbox for distance between dots in X direction-->
                         <TextBox  Grid.Column="1" Name="distance_between_dots_in_X_direction"        />
@@ -324,7 +325,7 @@
 
 
                         <!--button for touch position-->
-                        <Button Content="distance between dots in X direction" Grid.Column="2" FontSize="6" Click="Button_Click_16"  />
+                        <TextBlock Text="distance between dots in X direction" Grid.Column="2" FontSize="8" VerticalAlignment="Center" />
                      
                         <!--distance between dots-->
                         <TextBox  Grid.Column="3" Name="distance_between_dots_in_Y_direction" />
@@ -344,7 +345,7 @@
 
 
                         <!--button for Y direction dots-->
-                        <Button Content="number of dots in Y" Grid.Column="0" FontSize="6" Click="Button_Click_17"   />
+                        <TextBlock Text="number of dots in Y" Grid.Column="0" FontSize="8" VerticalAlignment="Center"  />
 
                         <!--textbox for Y distance between dots-->
                         <TextBox  Grid.Column="1" Name="distance_between_dots_in_direction"        />
@@ -352,7 +353,7 @@
 
 
                         <!--button for touch position-->
-                        <Button Content="distance between dots in Y direction" Grid.Column="2" FontSize="4" Click="Button_Click_18"  />
+                        <TextBlock Text="distance between dots in Y direction" Grid.Column="2" FontSize="8" VerticalAlignment="Center"   />
 
                         <!--distance between dots-->
                         <TextBox  Grid.Column="3" Name="distance_between_dots_inZ_direction" />

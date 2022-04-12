@@ -566,7 +566,7 @@ namespace trial_1
             StrReceiver = "";
             BlnBusy = true;
             BlnSet = false;
-            SendCommand("?X\r");            //Inquiry the current position of X axis
+            SendCommand("?Y\r");            //Inquiry the current position of X axis
             Delay(100000);
             BlnBusy = false;
 
@@ -625,22 +625,7 @@ namespace trial_1
            
         }
 
-        private void Button_Click_15(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_16(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_17(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_18(object sender, RoutedEventArgs e)
+        private void printing_dots_Click(object sender, RoutedEventArgs e)
         {
 
         }
