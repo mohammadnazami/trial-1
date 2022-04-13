@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:trial_1"
         mc:Ignorable="d"
-        Title="MainWindow" Loaded="Window_Loaded" WindowState="Minimized" ResizeMode="CanResize" MinWidth="1000" MinHeight="900" Height="900" >
+        Title="MainWindow" Loaded="Window_Loaded" WindowState="Minimized" ResizeMode="NoResize" MinWidth="900" Height="780" Width="1300" >
     <StackPanel>
         <Grid>
             <!-- devide page to two part-->
@@ -69,7 +69,8 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-
+                            <ColumnDefinition Width="*" />
+                         
                         </Grid.ColumnDefinitions>
 
                         <!--text of x position-->
@@ -77,11 +78,15 @@
 
                         <!--current position as recieved from machine-->
                         <TextBox x:Name="textbox7" Grid.Column="1" TextChanged="textbox7_TextChanged"  />
+
+                        <!--recieve position of XYZ-->
+                        <Button Content="position X" Grid.Column="2" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="position_X" Click="position_X_Click" Height="20" FontSize="10" />
                     </Grid>
 
                     <!-- postion of Y axis with its textbox -->
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
@@ -90,7 +95,10 @@
                         <TextBlock Text="Y:" FontSize="20" Grid.Column="0" HorizontalAlignment="Center" />
 
                         <!--current position of Y axis as recieved from machine-->
-                        <TextBox x:Name="textbox8" Grid.Column="1" />
+                        <TextBox x:Name="Y_position_textbox" Grid.Column="1" />
+
+                        <!--recieve position of XYZ-->
+                        <Button Content="position Y" Grid.Column="2" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="position_Y" Click="position_Y_Click" Height="20" FontSize="10" />
 
                     </Grid>
 
@@ -99,14 +107,24 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+
                         </Grid.ColumnDefinitions>
 
                         <!--text for Z postion-->
                         <TextBlock Text="Z" FontSize="20" Grid.Column="0" HorizontalAlignment="Center" />
 
                         <!--postion of Z axis as recieved from machine-->
-                        <TextBox x:Name="textbox9" Grid.Column="1" />
+                        <TextBox x:Name="Z_position_textbox" Grid.Column="1" />
+
+                        <!--recieve position of XYZ-->
+                        <Button Content="position Z" Grid.Column="2" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="postion_Z" Click="postion_Z_Click" Height="20" FontSize="10" />
+
+
                     </Grid>
+
+                    <!--recieve position of XYZ-->
+                    <Button Content="position XYZ" Grid.Column="2" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="position" Click="position_Click" Height="20" FontSize="10" />
 
 
 
@@ -184,11 +202,14 @@
                         <TextBox Name="speedshow" Text="0" Grid.Column="2" TextAlignment="Center" />
 
                         <!--value of speed as per recieved -->
-                        <TextBox Name="stepvalueshow" Text="0" Grid.Column="0" TextAlignment="Center"  />
+                        <TextBox Name="stepvalueshow" Text="0" Grid.Column="0" TextAlignment="Center" TextChanged="stepvalueshow_TextChanged"  />
                     </Grid>
 
                     <!-- stop button-->
                     <Button Style="{StaticResource button2}" Content="stop" Name="stop" Click="stop_Click"  Grid.ColumnSpan="2"    />
+
+                    <!--zero to XYZ-->
+                    <Button Content="Zero XYZ" Grid.Column="2" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="Zero_XYZ"  Click="Zero_XYZ_Click" Height="20" FontSize="10" />
 
                 </StackPanel>
 
@@ -216,10 +237,10 @@
                         </Grid.ColumnDefinitions>
 
                         <!--button for Y direction (Far) -->
-                        <Button Content="Far" Style="{StaticResource buttonarrow4}" Grid.Column="0" HorizontalAlignment="Center"  Click="Button_Click_3"  />
+                        <Button Content="Far" Style="{StaticResource buttonarrow4}" Grid.Column="0" HorizontalAlignment="Center"  Click="Button_Click_3" FontSize="12"  />
 
                         <!--button for Z direction (Up)-->
-                        <Button Content="Up" Grid.Column="1" Style="{StaticResource buttonarrow4}" HorizontalAlignment="Center" Click="Button_Click_5" />
+                        <Button Content="Up" Grid.Column="1" Style="{StaticResource buttonarrow4}" HorizontalAlignment="Center" Click="Button_Click_5" FontSize="12" />
 
                     </Grid>
 
@@ -236,19 +257,19 @@
                         </Grid.ColumnDefinitions>
 
                         <!--text of minus X-->
-                        <TextBlock Text="-X" Grid.Column="0" FontSize="12" VerticalAlignment="Center" />
+                        <TextBlock Text =" - X" Grid.Column="0" FontSize="12" VerticalAlignment="Center" Margin="0,30,42,31" />
 
                         <!--button for X direction-->
-                        <Button Content="Left" Style="{StaticResource buttonarrow}"  Click="Button_Click_6" FontSize="12" Grid.Column="1"  />
+                        <Button Content="Left" Style="{StaticResource buttonarrow}"  Click="Button_Click_6" FontSize="12" Margin="30,0,56,0" Grid.ColumnSpan="2"  />
 
                         <!--button for plus X -->
-                        <Button Content="Right" Grid.Column="3" Style="{StaticResource buttonarrow1}" Click="Button_Click_1"  FontSize="12" HorizontalAlignment="Right" Width="36" />
+                        <Button Content="Right" Grid.Column="2" Style="{StaticResource buttonarrow1}" Click="Button_Click_1"  FontSize="12" HorizontalAlignment="Right" Width="35" />
 
                         <!--text for puls X-->
-                        <TextBlock Text="X" Grid.Column="4" FontSize="12"  VerticalAlignment="Center"  />
+                        <TextBlock Text="   + X" Grid.Column="3" FontSize="12"  VerticalAlignment="Center" Margin="5,30,0,31" HorizontalAlignment="Left" Width="57"  />
 
                         <!--set position to move -->
-                        <TextBox Height="32" Grid.Column="2" Name="torun_textbox" TextChanged="torun_textbox_TextChanged" />
+                        <TextBox Height="32" Grid.Column="1" Name="torun_textbox" TextChanged="torun_textbox_TextChanged" Grid.ColumnSpan="2" Margin="10,22,40,23" />
 
                     </Grid>
 
@@ -291,13 +312,24 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <!--button for set save position-->
-                        <Button Content="reset position" Grid.Column="0"  HorizontalAlignment="Center" Click="Button_Click_12"    />
+                        <Button Content="reset point" Grid.Column="0"  HorizontalAlignment="Center" Name="reset_position_button" Click="reset_position_button_Click"       />
+
+                        <!--textbox for distance between dots in X direction-->
+                        <TextBox  Grid.Column="1"  Height="18" VerticalAlignment="Top" Name="reset_position_textbox"     />
 
                         <!--button for set touch position-->
-                        <Button Content="touch position" Grid.Column="1"  HorizontalAlignment="Center" Click="Button_Click_13" Margin="23,0"   />
+                        <Button Content="touch point" Grid.Column="2"  HorizontalAlignment="Center" Name="touch_position" Click="touch_position_Click"    />
+
+                     
+
+                        <!--textbox for touch point-->
+                        <TextBox  Grid.Column="3"  Height="18" VerticalAlignment="Top" Name="touch_point_textbox" />
+
                     </Grid>
 
 
@@ -389,7 +421,7 @@
 
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Camera " Grid.Column="1" FontSize="24" />
-                    <Button Content="Position" Grid.Column="2" Background="LightSalmon" VerticalAlignment="Bottom" Click="Button_Click_11" />
+
                     <Button Content="Disconnect"   Grid.Column="3" Click="Button_Click_14" />
                 </Grid>
                 <Rectangle Height="10" Stroke="Black" StrokeThickness="3" Margin="0,0,10,0">

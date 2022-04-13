@@ -260,6 +260,7 @@ namespace trial_1
             Delay(10000);
             BlnBusy = false;
             //  timer1.IsEnabled = false;
+            inquire_current_position_X();
         }
 
 
@@ -342,9 +343,9 @@ namespace trial_1
            // timer1.IsEnabled = true;
             Delay(1000);
             BlnBusy = false;
-          //  timer1.IsEnabled = false;
-           
+            //  timer1.IsEnabled = false;
 
+            inquire_current_position_Y();
             
         }
        
@@ -376,6 +377,8 @@ namespace trial_1
             Delay(1000);
             BlnBusy = false;
             //  timer1.IsEnabled = false;
+
+            inquire_current_position_Y();
 
         }
 
@@ -428,6 +431,8 @@ namespace trial_1
             Delay(1000);
             BlnBusy = false;
             //  timer1.IsEnabled = false;
+
+            inquire_current_position_Z();
         }
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
@@ -455,7 +460,7 @@ namespace trial_1
             BlnBusy = false;
             //  timer1.IsEnabled = false;
             resetpostion();
-            inquire_current_position();
+            inquire_current_position_X();
         }
 
         private void connection_textbox_TextChanged_1(object sender, TextChangedEventArgs e)
@@ -491,6 +496,8 @@ namespace trial_1
             Delay(1000);
             BlnBusy = false;
             //  timer1.IsEnabled = false;
+
+            inquire_current_position_Z();
 
         }
 
@@ -555,18 +562,15 @@ namespace trial_1
             //  timer1.IsEnabled = false;
         }
 
-        private void Button_Click_11(object sender, RoutedEventArgs e)
-        {
-            inquire_current_position();
-        }
+       
 
 
-        public void inquire_current_position()
+      /*  public void inquire_current_position()
         {
             StrReceiver = "";
             BlnBusy = true;
             BlnSet = false;
-            SendCommand("?Y\r");            //Inquiry the current position of X axis
+            SendCommand("?X\r");            //Inquiry the current position of X axis
             Delay(100000);
             BlnBusy = false;
 
@@ -592,7 +596,7 @@ namespace trial_1
             textbox7.Text = dCurrPosi.ToString();
         }
 
-
+      */
 
         private void textbox7_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -612,16 +616,6 @@ namespace trial_1
         private void Button_Click_14(object sender, RoutedEventArgs e)
         {
            
-            StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = true;
-            SendCommand("HX0\r");   //Home X axis
-
-            
-            
-            Delay(1000000);
-           
-            BlnBusy = false;
            
         }
 
@@ -640,11 +634,68 @@ namespace trial_1
             int x;
             for (x = 0; x > number_dot_X; x++)
             {
+                
                 sending(distance_between_dots_X);
             }
 
         }
 
+        public void doting()
+        {
+            /*
+            #region going down
+            long lStep;
+            long lstep1;
+            string s;
+
+
+            lStep = Convert.ToInt32(moving_distance / DblPulseEqui);
+            lstep1 = lStep * +1;
+            if (lstep1 > 0)
+                s = "+" + lStep.ToString();
+            else
+                s = lstep1.ToString();
+
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = true;
+            SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
+
+            // timer1.IsEnabled = true;
+            Delay(1000);
+            BlnBusy = false;
+            //  timer1.IsEnabled = false;
+            #endregion going down
+            */
+
+
+           /* #region coming up
+            long lStep;
+            long lstep1;
+            string s;
+
+
+            lStep = Convert.ToInt32(moving_distance / DblPulseEqui);
+            lstep1 = lStep * +1;
+            if (lstep1 > 0)
+                s = "+" + lStep.ToString();
+            else
+                s = lstep1.ToString();
+
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = true;
+            SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
+
+            // timer1.IsEnabled = true;
+            Delay(1000);
+            BlnBusy = false;
+            //  timer1.IsEnabled = false;
+
+            #endregion coming up
+    */
+
+        }
 
         public void sending(int moving_distance)
         {
@@ -674,6 +725,164 @@ namespace trial_1
         private void distance_between_dots_in_Y_direction_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void stepvalueshow_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_15(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Zero_XYZ_Click(object sender, RoutedEventArgs e)
+        {
+
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = true;
+          //  SendCommand("HX0\r");   //Home X axis
+            SendCommand("HY0\r");
+
+            Delay(10000);
+
+            SendCommand("HZ0\r");
+
+
+
+            Delay(100000);
+
+            BlnBusy = false;
+            inquire_current_position_X();
+            inquire_current_position_Y();
+            inquire_current_position_Z();
+        }
+
+        private void position_Click(object sender, RoutedEventArgs e)
+        {
+            inquire_current_position_X();
+            inquire_current_position_Y();
+            inquire_current_position_Z();
+        }
+
+        private void position_X_Click(object sender, RoutedEventArgs e)
+        {
+            inquire_current_position_X();
+        }
+
+        private void position_Y_Click(object sender, RoutedEventArgs e)
+        {
+            inquire_current_position_Y();
+        }
+
+        private void postion_Z_Click(object sender, RoutedEventArgs e)
+        {
+            inquire_current_position_Z();
+        }
+
+       public void inquire_current_position_X()
+        {
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = false;
+            SendCommand("?X\r");            //Inquiry the current position of X axis
+            Delay(100000);
+            BlnBusy = false;
+
+            if (StrReceiver != "")
+            {
+                try
+                {
+
+
+                    if (StrReceiver.Substring(5, 1) == "-")
+                        lCurrStep = -Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                    else
+                        lCurrStep = Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                }
+                catch
+                {
+                    MessageBox.Show("failed to connect");
+                }
+            }
+            else
+                return;
+            dCurrPosi = lCurrStep * DblPulseEqui;
+            textbox7.Text = dCurrPosi.ToString();
+        }
+
+        public void inquire_current_position_Y()
+        {
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = false;
+            SendCommand("?Y\r");            //Inquiry the current position of X axis
+            Delay(100000);
+            BlnBusy = false;
+
+            if (StrReceiver != "")
+            {
+                try
+                {
+
+
+                    if (StrReceiver.Substring(5, 1) == "-")
+                        lCurrStep = -Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                    else
+                        lCurrStep = Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                }
+                catch
+                {
+                    MessageBox.Show("failed to connect");
+                }
+            }
+            else
+                return;
+            dCurrPosi = lCurrStep * DblPulseEqui;
+            Y_position_textbox.Text = dCurrPosi.ToString();
+        }
+
+        public void inquire_current_position_Z()
+        {
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = false;
+            SendCommand("?Z\r");            //Inquiry the current position of X axis
+            Delay(100000);
+            BlnBusy = false;
+
+            if (StrReceiver != "")
+            {
+                try
+                {
+
+
+                    if (StrReceiver.Substring(5, 1) == "-")
+                        lCurrStep = -Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                    else
+                        lCurrStep = Convert.ToInt64(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                }
+                catch
+                {
+                    MessageBox.Show("failed to connect");
+                }
+            }
+            else
+                return;
+            dCurrPosi = lCurrStep * DblPulseEqui;
+            Z_position_textbox.Text = dCurrPosi.ToString();
+        }
+
+        private void reset_position_button_Click(object sender, RoutedEventArgs e)
+        {
+            reset_position_textbox.Text = Z_position_textbox.Text;
+        }
+
+        private void touch_position_Click(object sender, RoutedEventArgs e)
+        {
+            touch_point_textbox.Text = Z_position_textbox.Text;
         }
     }
 }
