@@ -1040,5 +1040,10 @@ namespace trial_1
         #endregion
         // end camera
         #endregion camera
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
