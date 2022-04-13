@@ -14,6 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO.Ports;
 using System.Windows.Threading;
+using System.Drawing;
+using System.IO;
+using AForge.Video;
+using AForge.Video.DirectShow;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Threading;
+
 
 namespace trial_1
 {
