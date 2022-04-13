@@ -884,5 +884,7 @@ namespace trial_1
         {
             touch_point_textbox.Text = Z_position_textbox.Text;
         }
+
+       
     }
 }
