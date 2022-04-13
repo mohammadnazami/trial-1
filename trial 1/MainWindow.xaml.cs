@@ -21,6 +21,7 @@ using AForge.Video.DirectShow;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Threading;
+using AForge.Imaging;
 
 
 namespace trial_1
@@ -907,7 +908,7 @@ namespace trial_1
             }
         }
 
-        private void StartCamera()
+      /*  private void StartCamera()
         {
             if (CurrentDevice != null)
             {
@@ -916,6 +917,12 @@ namespace trial_1
                 _videoSource.Start();
             }
         }
+
+    */
+
+
+
+
 
         private void Button_Click_16(object sender, RoutedEventArgs e)
         {
@@ -927,24 +934,7 @@ namespace trial_1
             StartCamera();
         }
 
-        private void video_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
-        {
-            try
-            {
-                BitmapImage bi;
-                using (var bitmap = (Bitmap)eventArgs.Frame.Clone())
-                {
-                    bi = bitmap.ToBitmapImage();
-                }
-                bi.Freeze(); // avoid cross thread operations and prevents leaks
-                Dispatcher.BeginInvoke(new ThreadStart(delegate { videoPlayer.Source = bi; }));
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show("Error on _videoSource_NewFrame:\n" + exc.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Button_Click_11();
-            }
-        }
+       
 
         #region camera
         // camera
@@ -975,10 +965,7 @@ namespace trial_1
             StopCamera();
         }
 
-        private void btnStart_Click(object sender, RoutedEventArgs e)
-        {
-            StartCamera();
-        }
+      
 
         private void video_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
         {
@@ -999,10 +986,7 @@ namespace trial_1
             }
         }
 
-        private void btnStop_Click(object sender, RoutedEventArgs e)
-        {
-            StopCamera();
-        }
+      
 
         private void GetVideoDevices()
         {
