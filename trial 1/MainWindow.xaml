@@ -428,7 +428,7 @@
                   VerticalAlignment="Top"
                   DisplayMemberPath="Name"
                   ItemsSource="{Binding VideoDevices}"
-                  SelectedItem="{Binding CurrentDevice}" Grid.Column="4" Margin="0,10,0,0" SelectionChanged="comboBox_SelectionChanged" />
+                  SelectedItem="{Binding CurrentDevice}" Grid.Column="4" SelectionChanged="comboBox_SelectionChanged" />
                 </Grid>
                 <Image x:Name="videoPlayer" Height="600"  />
 
