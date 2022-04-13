@@ -892,7 +892,11 @@ namespace trial_1
 
         private void Button_Click_11(object sender, RoutedEventArgs e)
         {
-
+            if (_videoSource != null && _videoSource.IsRunning)
+            {
+                _videoSource.SignalToStop();
+                _videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
+            }
         }
     }
 }
