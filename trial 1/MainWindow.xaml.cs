@@ -653,9 +653,34 @@ namespace trial_1
             int x;
             for (x = 0; x > number_dot_X; x++)
             {
-                
                 sending(distance_between_dots_X);
+                for (int y = 0; y < number_dots_Y; y++)
+                {
+                    //  Movement_z();
+                    Delay(500);
+
+                    // number of dots
+                    for (int xi = 0; xi < c; xi++)
+                    {
+                        // distance between dots
+                           Movement_x();
+                        Delay(1000);
+
+                            Movement_y();
+                        Delay(500);
+                          Movement_minusy();
+                        Delay(500);
+                    }
+
+                    // come to first of next line
+                    //    Movement_minusx();
+                    Delay(500);
+                    inquire_current_position_X();
+                    inquire_current_position_Y();
+                    inquire_current_position_Z();
+                }
             }
+
 
         }
 
