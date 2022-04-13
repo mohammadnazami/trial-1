@@ -263,7 +263,7 @@
                         <Button Content="Left" Style="{StaticResource buttonarrow}"  Click="Button_Click_6" FontSize="12" Margin="30,0,56,0" Grid.ColumnSpan="2"  />
 
                         <!--button for plus X -->
-                        <Button Content="Right" Grid.Column="2" Style="{StaticResource buttonarrow1}" Click="Button_Click_1"  FontSize="12" HorizontalAlignment="Right" Width="35" />
+                        <Button Content="Right" Grid.Column="2" Style="{StaticResource buttonarrow1}" Click="Button_Click_1"  FontSize="12" HorizontalAlignment="Right" />
 
                         <!--text for puls X-->
                         <TextBlock Text="   + X" Grid.Column="3" FontSize="12"  VerticalAlignment="Center" Margin="5,30,0,31" HorizontalAlignment="Left" Width="57"  />

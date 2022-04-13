@@ -885,6 +885,14 @@ namespace trial_1
             touch_point_textbox.Text = Z_position_textbox.Text;
         }
 
-       
+        private void Button_Click_11()
+        {
+
+        }
+
+        private void Button_Click_11(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
