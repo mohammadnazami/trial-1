@@ -281,6 +281,16 @@ namespace trial_1
             
             sSpeed = 200;
             timer1.Start();
+
+            #region camera intiation
+            // for camera
+            this.DataContext = this;
+            GetVideoDevices();
+            this.Closing += MainWindow_Closing;
+            // end for camera
+            #endregion camera intiation
+
+
         }
 
 

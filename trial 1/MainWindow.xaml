@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:trial_1"
         mc:Ignorable="d"
-        Title="MainWindow" Loaded="Window_Loaded" WindowState="Minimized" ResizeMode="NoResize" MinWidth="900" Height="780" Width="1300" >
+        Title="MainWindow" Loaded="Window_Loaded" WindowState="Minimized" ResizeMode="NoResize" MinWidth="900" Height="780" Width="1200" >
     <StackPanel>
         <Grid>
             <!-- devide page to two part-->
@@ -237,7 +237,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--button for Y direction (Far) -->
-                        <Button Content="Far" Style="{StaticResource buttonarrow4}" Grid.Column="0" HorizontalAlignment="Center"  Click="Button_Click_3" FontSize="12"  />
+                        <Button Content="Far" Style="{StaticResource buttonarrow4}" Grid.Column="0" HorizontalAlignment="Center"  Click="Button_Click_3" FontSize="12" Margin="66,0,57,0"  />
 
                         <!--button for Z direction (Up)-->
                         <Button Content="Up" Grid.Column="1" Style="{StaticResource buttonarrow4}" HorizontalAlignment="Center" Click="Button_Click_5" FontSize="12" />
@@ -253,38 +253,40 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+
+
                         </Grid.ColumnDefinitions>
 
                         <!--text of minus X-->
-                        <TextBlock Text =" - X" Grid.Column="0" FontSize="12" VerticalAlignment="Center" Margin="0,30,42,31" />
+                        <TextBlock Text =" - X" Grid.Column="0" FontSize="12" VerticalAlignment="Center"  />
 
                         <!--button for X direction-->
-                        <Button Content="Left" Style="{StaticResource buttonarrow}"  Click="Button_Click_6" FontSize="12" Margin="30,0,56,0" Grid.ColumnSpan="2"  />
+                        <Button Content="Left" Style="{StaticResource buttonarrow}"  Click="Button_Click_6" FontSize="12" Margin="28,0,0,0"   />
 
                         <!--button for plus X -->
-                        <Button Content="Right" Grid.Column="2" Style="{StaticResource buttonarrow1}" Click="Button_Click_1"  FontSize="12" HorizontalAlignment="Right" />
+                        <Button Content="Right" Grid.Column="2" Style="{StaticResource buttonarrow1}" Click="Button_Click_1"  FontSize="12" HorizontalAlignment="Right" Width="39" Margin="0,0,22,0"  />
 
                         <!--text for puls X-->
                         <TextBlock Text="   + X" Grid.Column="3" FontSize="12"  VerticalAlignment="Center" Margin="5,30,0,31" HorizontalAlignment="Left" Width="57"  />
 
                         <!--set position to move -->
-                        <TextBox Height="32" Grid.Column="1" Name="torun_textbox" TextChanged="torun_textbox_TextChanged" Grid.ColumnSpan="2" Margin="10,22,40,23" />
+                        <TextBox Height="32" Grid.Column="1" Name="torun_textbox" TextChanged="torun_textbox_TextChanged" Margin="5,22,0,23" />
 
                     </Grid>
 
                     <!--grid for buttons of Y and Z-->
                     <Grid >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="199*"/>
+                            <ColumnDefinition Width="185*"/>
+                            <ColumnDefinition Width="14*"/>
                         </Grid.ColumnDefinitions>
 
                         <!--button for minus Y -->
-                        <Button Content="Closer" Grid.Column="0" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Center"   Click="Button_Click_4" FontSize="12" />
+                        <Button Content="Closer" Grid.Column="0" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Center"   Click="Button_Click_4" FontSize="12" Margin="64,0,59,0" RenderTransformOrigin="0.474,0.205" />
 
                         <!--button for minus Z-->
-                        <Button Content="Down" Grid.Column="1" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click_8" FontSize="12" />
+                        <Button Content="Down" Grid.Column="1" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click_8" FontSize="12" Margin="61,0,47,0" />
 
                     </Grid>
 
@@ -417,7 +419,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Camera " Grid.Column="1" FontSize="24" />
+                    <TextBlock Text="Camera " Grid.Column="1" FontSize="12" />
                     <Button Content="connect" Grid.Column="2" Click="camera_connect" />
 
                     <Button Content="Disconnect"   Grid.Column="3" Click="Button_Click_11"  />
@@ -430,7 +432,8 @@
                   ItemsSource="{Binding VideoDevices}"
                   SelectedItem="{Binding CurrentDevice}" Grid.Column="4" SelectionChanged="comboBox_SelectionChanged" />
                 </Grid>
-                <Image x:Name="videoPlayer" Height="600"  />
+
+                <Image x:Name="videoPlayer" Stretch="Uniform" Width="1200" Margin="10" />
 
             </StackPanel>
 
