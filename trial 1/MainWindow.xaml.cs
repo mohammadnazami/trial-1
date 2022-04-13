@@ -898,5 +898,25 @@ namespace trial_1
                 _videoSource.NewFrame -= new NewFrameEventHandler(video_NewFrame);
             }
         }
+
+        private void StartCamera()
+        {
+            if (CurrentDevice != null)
+            {
+                _videoSource = new VideoCaptureDevice(CurrentDevice.MonikerString);
+                _videoSource.NewFrame += video_NewFrame;
+                _videoSource.Start();
+            }
+        }
+
+        private void Button_Click_16(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void camera_connect(object sender, RoutedEventArgs e)
+        {
+            StartCamera();
+        }
     }
 }

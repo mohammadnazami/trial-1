@@ -418,7 +418,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Camera " Grid.Column="1" FontSize="24" />
-                    <Button Content="connect" Grid.Column="2" />
+                    <Button Content="connect" Grid.Column="2" Click="camera_connect" />
 
                     <Button Content="Disconnect"   Grid.Column="3" Click="Button_Click_11"  />
                 </Grid>
