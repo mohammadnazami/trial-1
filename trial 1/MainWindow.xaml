@@ -92,6 +92,57 @@
 
                     </Grid>
 
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Height="20" Content="5 &#956;m" Name="fivemicrometer_1_stepsize" Click="fivemicrometer_1_stepsize_Click" />
+                                <Button Grid.Column="1" Content="10 &#956;m" Name="tenmicrometer_2_stepsize" Click="tenmicrometer_2_stepsize_Click" />
+
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0" Height="20" Content="20 &#956;m" Name="twentymicrometer_4stepsize" Click="twentymicrometer_4stepsize_Click" />
+                                <Button Grid.Column="1" Content="40 &#956;m" Name="fortymicrometer_8stepsize" Click="fortymicrometer_8stepsize_Click"/>
+
+                            </Grid>
+
+
+
+
+
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" >
+                            <!--speed setting-->
+                            <DockPanel Grid.Column="8" >
+                                <TextBox Text="{Binding ElementName=slValue1, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" TextChanged="TextBox_TextChanged_2" Width="25" Name="speedtextbox"  />
+                                <Slider Style="{StaticResource AppSliderStyle}" Maximum="255" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="slValue1"   >
+                                    <Slider.Background>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color = "#92D14F" Offset = "0" />
+                                            <GradientStop Color = "#92D14F" Offset = "1" />
+                                        </LinearGradientBrush>
+                                    </Slider.Background>
+                                </Slider>
+                            </DockPanel>
+
+                        </StackPanel>
+                        
+                        
+                        
+                        
+                    </Grid>
+
 
                     <!-- grid of step size and motor speed setting-->
                     <Grid  >
@@ -102,27 +153,12 @@
                             <ColumnDefinition Width="315*"/>
                         </Grid.ColumnDefinitions>
 
-                        <!--step size-->
-                        <DockPanel Grid.Column="1" >
-                            <TextBox Text="{Binding ElementName=slValue, Path=Value, UpdateSourceTrigger=PropertyChanged}"  TextChanged="TextBox_TextChanged_1" Name="X_axis_stepsize" DockPanel.Dock="Right" TextAlignment="Right" Width="18"  />
-                            <Slider Style="{StaticResource AppSliderStyle}" Minimum="1" Maximum="4" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="slValue" VerticalAlignment="Bottom" ValueChanged="slValue_ValueChanged"
-                                   
-                                />
+                      
+                       
 
-                        </DockPanel>
+                       
 
-                        <!--speed setting-->
-                        <DockPanel Grid.Column="8" >
-                            <TextBox Text="{Binding ElementName=slValue1, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" TextChanged="TextBox_TextChanged_2" Width="25" Name="speedtextbox"  />
-                            <Slider Style="{StaticResource AppSliderStyle}" Maximum="255" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="slValue1"   >
-                                <Slider.Background>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color = "#92D14F" Offset = "0" />
-                                        <GradientStop Color = "#92D14F" Offset = "1" />
-                                    </LinearGradientBrush>
-                                </Slider.Background>
-                            </Slider>
-                        </DockPanel>
+                       
 
                     </Grid>
 
@@ -142,7 +178,7 @@
                         <TextBox Name="speedshow" Text="0" Grid.Column="2" TextAlignment="Center" />
 
                         <!--value of speed as per recieved -->
-                        <TextBox Name="stepvalueshow" Text="0" Grid.Column="0" TextAlignment="Center" TextChanged="stepvalueshow_TextChanged"  />
+                        <TextBlock Name="stepvalueshow" Text="0" Grid.Column="0" TextAlignment="Center" />
                     </Grid>
 
                     <!-- stop button-->

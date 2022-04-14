@@ -1262,5 +1262,29 @@ namespace trial_1
         {
 
         }
+
+        private void fivemicrometer_1_stepsize_Click(object sender, RoutedEventArgs e)
+        {
+            DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / (180), 5);
+            stepvalueshow.Text = "step size is 5 micro meter";
+        }
+
+        private void tenmicrometer_2_stepsize_Click(object sender, RoutedEventArgs e)
+        {
+            DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / ((Convert.ToDouble(180) * Convert.ToDouble(2))), 5);
+            stepvalueshow.Text = "stepsize is ten micro meter";
+        }
+
+        private void twentymicrometer_4stepsize_Click(object sender, RoutedEventArgs e)
+        {
+            DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / ((Convert.ToDouble(180) * Convert.ToDouble(4))), 5);
+            stepvalueshow.Text = "step size is 20 micro meter";
+        }
+
+        private void fortymicrometer_8stepsize_Click(object sender, RoutedEventArgs e)
+        {
+            DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / ((Convert.ToDouble(180) * Convert.ToDouble(8))), 5);
+            stepvalueshow.Text = "stepsize is 40 micro meter";
+        }
     }
 }
