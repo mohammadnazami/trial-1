@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:trial_1"
         mc:Ignorable="d"
-        Title="MainWindow" Loaded="Window_Loaded" WindowState="Minimized" ResizeMode="NoResize" MinWidth="900" Height="780" Width="1200" >
+        Title="MainWindow" Loaded="Window_Loaded" WindowState="Minimized" ResizeMode="NoResize" MinWidth="900" Height="900" Width="1200" >
     <StackPanel>
         <Grid>
             <!-- devide page to two part-->
@@ -35,7 +35,7 @@
                         <TextBlock Text=" Port:" Grid.Column="1" FontSize="20" VerticalAlignment="Center"    />
 
                         <!--textbox of port number -->
-                        <TextBox Grid.Column="2" FontSize="12" TextAlignment="Center" Name="portnumber" Background="LightGray" />
+                        <TextBox Grid.Column="2" FontSize="24" TextAlignment="Center" Name="portnumber" Background="LightGray" TextChanged="portnumber_TextChanged_2" />
 
                         <!--button for connection-->
                         <Button Content="connnect" Style="{StaticResource button2}" Grid.Column="3" Name="connect" Click="connect_Click" FontSize="12"   />
@@ -56,76 +56,16 @@
                         <TextBlock Text="Status" FontSize="24" TextAlignment="Center" />
 
                         <!--textbox to show connected or disconnected-->
-                        <TextBox Grid.Column="1" Name="connection_textbox" TextChanged="connection_textbox_TextChanged_1" FontSize="12" TextAlignment="Center" Background="LightGray"  />
+                        <TextBox Grid.Column="1" Name="connection_textbox" TextChanged="connection_textbox_TextChanged_1" FontSize="12" TextAlignment="Center" Background="LightGray" BorderThickness="0"  />
                     </Grid>
 
 
-                    <!--text for current postion-->
-                    <TextBlock Text="  Current Postion" FontSize="24" />
+                   
 
 
-                    <!-- postion of X axis with its textbox -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                    
 
-                        </Grid.ColumnDefinitions>
-
-                        <!--text of x position-->
-                        <TextBlock Text="X" FontSize="20" Grid.Column="0" HorizontalAlignment="Center" />
-
-                        <!--current position as recieved from machine-->
-                        <TextBox x:Name="textbox7" Grid.Column="1" TextChanged="textbox7_TextChanged"  />
-
-                        <!--recieve position of XYZ-->
-                        <Button Content="position X" Grid.Column="2" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="position_X" Click="position_X_Click" Height="20" FontSize="10" />
-                    </Grid>
-
-                    <!-- postion of Y axis with its textbox -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <!--text for Y postion-->
-                        <TextBlock Text="Y:" FontSize="20" Grid.Column="0" HorizontalAlignment="Center" />
-
-                        <!--current position of Y axis as recieved from machine-->
-                        <TextBox x:Name="Y_position_textbox" Grid.Column="1" />
-
-                        <!--recieve position of XYZ-->
-                        <Button Content="position Y" Grid.Column="2" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="position_Y" Click="position_Y_Click" Height="20" FontSize="10" />
-
-                    </Grid>
-
-                    <!-- postion of Z axis with its textbox -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-
-                        </Grid.ColumnDefinitions>
-
-                        <!--text for Z postion-->
-                        <TextBlock Text="Z" FontSize="20" Grid.Column="0" HorizontalAlignment="Center" />
-
-                        <!--postion of Z axis as recieved from machine-->
-                        <TextBox x:Name="Z_position_textbox" Grid.Column="1" />
-
-                        <!--recieve position of XYZ-->
-                        <Button Content="position Z" Grid.Column="2" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="postion_Z" Click="postion_Z_Click" Height="20" FontSize="10" />
-
-
-                    </Grid>
-
-                    <!--recieve position of XYZ-->
-                    <Button Content="position XYZ" Grid.Column="2" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="position" Click="position_Click" Height="20" FontSize="10" />
-
+                  
 
 
                 </StackPanel>
@@ -330,14 +270,14 @@
 
 
                         <!--textbox for touch point-->
-                        <TextBox  Grid.Column="3"  Height="18" VerticalAlignment="Top" Name="touch_point_textbox" />
+                        <TextBox  Grid.Column="3"   Name="touch_point_textbox" />
 
                     </Grid>
 
 
-
-                    <!--button for Printing -->
-                    <Button Content="printing" Name="printing_dots" Click="printing_dots_Click" Margin="10,10" />
+                    <StackPanel Background="AliceBlue" Margin="1,5,0,0">
+                        <!--button for Printing -->
+                    <Button Content="printing dots" Name="printing_dots" Click="printing_dots_Click" Margin="10,10" />
 
                     <!--grid for save position and touch position -->
                     <Grid >
@@ -365,9 +305,9 @@
                         <TextBox  Grid.Column="3" Name="distance_between_dots_in_X_direction" TextChanged="distance_between_dots_in_Y_direction_TextChanged" />
                     </Grid>
 
+                   
 
-
-                    <!--grid for Y dots and distance  -->
+                <!--grid for Y dots and distance  -->
                     <Grid >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -392,6 +332,90 @@
                         <!--distance between dots-->
                         <TextBox  Grid.Column="3" Name="distance_between_dots_in_Y_direction" />
                     </Grid>
+
+                    </StackPanel>
+
+
+
+                    <StackPanel Background="AliceBlue" Margin="1,5,0,0">
+                        <!--button for Printing -->
+                        <Button Content="printing lines" Name="printing_lines"  Margin="10,10" Click="printing_lines_Click" />
+
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                               
+                            </Grid.ColumnDefinitions>
+                            <!--text for number of lines-->
+                            <TextBlock Text="length of lines in X" Grid.Column="0" FontSize="8"   VerticalAlignment="Center"   />
+
+                            <!--textbox for distance between lines in X direction-->
+                            <TextBox  Grid.Column="1" Name="length_of_lines_in_X_direction" Height="18" VerticalAlignment="Top"       />
+                        </Grid>
+
+
+                       
+
+                        <!--grid for save position and touch position -->
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+
+                            </Grid.ColumnDefinitions>
+
+
+                            <!--text for number of dots-->
+                            <TextBlock Text="number of lines in X" Grid.Column="0" FontSize="8"   VerticalAlignment="Center"   />
+
+                            <!--textbox for distance between dots in X direction-->
+                            <TextBox  Grid.Column="1" Name="number_of_lines_in_X_direction" Height="18" VerticalAlignment="Top" TextChanged="number_of_lines_in_X_direction_TextChanged"       />
+
+
+
+                            <!--button for touch position-->
+                            <TextBlock Text="distance between lines in X direction" Grid.Column="2" FontSize="8" VerticalAlignment="Center" />
+
+                            <!--distance between dots-->
+                            <TextBox  Grid.Column="3" Name="distance_between_lines_in_X_direction"  />
+                        </Grid>
+
+
+
+                        <!--grid for Y dots and distance  -->
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+
+                            </Grid.ColumnDefinitions>
+
+
+                            <!--button for Y direction dots-->
+                            <TextBlock Text="number of dots in Y" Grid.Column="0" FontSize="8" VerticalAlignment="Center"  />
+
+                            <!--textbox for Y distance between dots-->
+                            <TextBox  Grid.Column="1" Name="number_of_lines_in_Y_direction" />
+
+
+
+                            <!--button for touch position-->
+                            <TextBlock Text="distance between lines in Y direction" Grid.Column="2" FontSize="8"   />
+
+                            <!--distance between dots-->
+                            <TextBox  Grid.Column="3" Name="distance_between_lines_in_Y_direction" />
+                        </Grid>
+
+                    </StackPanel>
 
 
 
@@ -435,8 +459,81 @@
 
                 <Image x:Name="videoPlayer" Stretch="Uniform" Width="1200" Margin="10" />
 
-            </StackPanel>
 
+
+
+                <!-- postion of X axis with its textbox -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+
+                    <!--recieve position of XYZ-->
+                    <Button Content="position XYZ" Grid.Column="0" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="position" Click="position_Click" Height="20" FontSize="10" />
+
+
+
+                    <!--text of x position-->
+                    <TextBlock Text="X : " FontSize="12" Grid.Column="1" HorizontalAlignment="Right" />
+
+                    <!--current position as recieved from machine-->
+                    <TextBox x:Name="textbox7" Grid.Column="2" TextChanged="textbox7_TextChanged" BorderThickness="0" TextAlignment="Center" />
+
+                    <!--text for Y postion-->
+                    <TextBlock Text="Y : " FontSize="12" Grid.Column="3" HorizontalAlignment="Right" />
+
+                    <!--current position of Y axis as recieved from machine-->
+                    <TextBox x:Name="Y_position_textbox" Grid.Column="4" BorderThickness="0" />
+
+                    <!--text for Z postion-->
+                    <TextBlock Text="Z : " FontSize="12" Grid.Column="5" HorizontalAlignment="Right" />
+
+                    <!--postion of Z axis as recieved from machine-->
+                    <TextBox x:Name="Z_position_textbox" Grid.Column="6" TextChanged="Z_position_textbox_TextChanged" BorderThickness="0" />
+
+                  
+
+
+                </Grid>
+
+                <!-- postion of Y axis with its textbox -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                 
+
+
+
+                </Grid>
+
+                <!-- postion of Z axis with its textbox -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+
+                  
+
+
+
+                </Grid>
+            </StackPanel>
 
         </Grid>
     </StackPanel>

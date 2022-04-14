@@ -61,6 +61,11 @@ namespace trial_1
         private void connect_Click(object sender, RoutedEventArgs e)
         {
             ConnectPort(Convert.ToInt16(portnumber.Text));
+
+            //recievend position right after connecting
+            inquire_current_position_X();
+            inquire_current_position_Y();
+            inquire_current_position_Z();
         }
         public void ConnectPort(short sPort)
         {
@@ -255,7 +260,7 @@ namespace trial_1
             string s;
           
 
-            lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text) - dCurrPosi) / DblPulseEqui);
+            lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
             if (lStep > 0)
                 s = "+" + lStep.ToString();
             else
@@ -289,6 +294,8 @@ namespace trial_1
             this.Closing += MainWindow_Closing;
             // end for camera
             #endregion camera intiation
+
+
 
 
         }
@@ -433,21 +440,23 @@ namespace trial_1
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
             long lStep;
+            long lstep1;
             string s;
            
 
             lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
-            if (lStep > 0)
-                s = "+" + lStep.ToString();
+            lstep1 = lStep * -1;
+            if (lstep1 > 0)
+                s = "+" + lstep1.ToString();
             else
-                s = lStep.ToString();
+                s = lstep1.ToString();
             StrReceiver = "";
             BlnBusy = true;
             BlnSet = true;
             SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
 
             // timer1.IsEnabled = true;
-            Delay(1000);
+            Delay(10000);
             BlnBusy = false;
             //  timer1.IsEnabled = false;
 
@@ -500,9 +509,9 @@ namespace trial_1
 
 
             lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
-            lstep1 = lStep * -1;
+            lstep1 = lStep;
             if (lstep1 > 0)
-                s = "+" + lStep.ToString();
+                s = "+" + lstep1.ToString();
             else
                 s = lstep1.ToString();
 
@@ -512,7 +521,7 @@ namespace trial_1
             SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
 
             // timer1.IsEnabled = true;
-            Delay(1000);
+            Delay(10000);
             BlnBusy = false;
             //  timer1.IsEnabled = false;
 
@@ -644,44 +653,147 @@ namespace trial_1
             double touching_point = x_touch_position;
 
             int number_dot_X = Convert.ToInt16(number_of_dots_in_X_direction.Text);
-            int distance_between_dots_X = Convert.ToInt32(distance_between_dots_in_X_direction.Text);
+            double distance_between_dots_X = Convert.ToDouble(distance_between_dots_in_X_direction.Text);
 
-            double number_dots_Y = Convert.ToDouble(number_of_dots_in_Y_direction.Text);
+            double to_come_back_in_x_direction = number_dot_X * distance_between_dots_X * -1;
+
+
+
+            int number_dots_Y = Convert.ToInt32(number_of_dots_in_Y_direction.Text);
             double distance_dots_Y = Convert.ToDouble(distance_between_dots_in_Y_direction.Text);
 
+          
 
-            int x;
-            for (x = 0; x > number_dot_X; x++)
-            {
-                sending(distance_between_dots_X);
-                for (int y = 0; y < number_dots_Y; y++)
+
+            #region finding distance between reset and touch points distance
+
+            double touch_point = Convert.ToDouble(touch_point_textbox.Text);
+            double reset_point = Convert.ToDouble(reset_position_textbox.Text);
+            double travel_in_z_direction = touch_point - reset_point;
+            double upside_travel_in_z_direction = travel_in_z_direction * -1;
+            #endregion
+
+
+
+
+            for (int y = 0; y < number_dots_Y; y++)
                 {
                     //  Movement_z();
-                    Delay(500);
+                    Delay(1000);
 
                     // number of dots
-                    for (int xi = 0; xi < c; xi++)
+                    for (int xi = 0; xi < number_dot_X; xi++)
                     {
-                        // distance between dots
-                           Movement_x();
+                    // distance between dots
+                    //   moving_in_X_direction(distance_between_dots_X);
+
+                    moving_in_Y_direction(distance_between_dots_X);
                         Delay(1000);
 
-                            Movement_y();
-                        Delay(500);
-                          Movement_minusy();
-                        Delay(500);
+                         moving_in_Z_direction(travel_in_z_direction);
+                        Delay(1000);
+
+
+                         moving_in_Z_direction(upside_travel_in_z_direction);
+                        Delay(1000);
                     }
 
-                    // come to first of next line
-                    //    Movement_minusx();
-                    Delay(500);
-                    inquire_current_position_X();
-                    inquire_current_position_Y();
-                    inquire_current_position_Z();
-                }
+                // come to first of next line
+                moving_in_Y_direction(distance_dots_Y);
+                Delay(1000);
+
+                // to initial point of next line
+                moving_in_X_direction(to_come_back_in_x_direction);
+                Delay(1000);
+
             }
 
 
+
+
+            // recieveing positions
+            inquire_current_position_X();
+            Delay(10000);
+            inquire_current_position_Y();
+            Delay(10000);
+            inquire_current_position_Z();
+
+
+
+
+        }
+
+
+
+        private void printing_lines_Click(object sender, RoutedEventArgs e)
+        {
+            double reseting_point = x_save_position;
+            double touching_point = x_touch_position;
+
+            int number_lines_X = Convert.ToInt16(number_of_lines_in_X_direction.Text);
+            double distance_between_lines_X = Convert.ToDouble(distance_between_lines_in_X_direction.Text);
+            double length_of_line = Convert.ToDouble(length_of_lines_in_X_direction.Text);
+
+            double to_come_back_in_x_direction = number_lines_X *(distance_between_lines_X+length_of_line) * -1;
+
+            int number_lines_Y = Convert.ToInt32(number_of_lines_in_Y_direction.Text);
+            double distance_lines_Y = Convert.ToDouble(distance_between_lines_in_Y_direction.Text);
+
+
+
+
+            #region finding distance between reset and touch points distance
+
+            double touch_point = Convert.ToDouble(touch_point_textbox.Text);
+            double reset_point = Convert.ToDouble(reset_position_textbox.Text);
+            double travel_in_z_direction = touch_point - reset_point;
+            double upside_travel_in_z_direction = travel_in_z_direction * -1;
+            #endregion
+
+
+
+
+            for (int y = 0; y < number_lines_Y; y++)
+            {
+                //  Movement_z();
+                Delay(1000);
+
+                // number of dots
+                for (int xi = 0; xi < number_lines_X; xi++)
+                {
+                    // distance between dots
+                    moving_in_X_direction(distance_between_lines_X);
+                    Delay(1000);
+
+                    moving_in_Z_direction(travel_in_z_direction);
+                    Delay(1000);
+
+                    moving_in_X_direction(length_of_line);
+
+
+                    moving_in_Z_direction(upside_travel_in_z_direction);
+                    Delay(1000);
+                }
+
+                // come to first of next line
+                moving_in_Y_direction(distance_lines_Y);
+                Delay(1000);
+
+                // to initial point of next line
+                moving_in_X_direction(to_come_back_in_x_direction);
+                Delay(1000);
+
+            }
+
+
+
+
+            // recieveing positions
+            inquire_current_position_X();
+            Delay(10000);
+            inquire_current_position_Y();
+            Delay(10000);
+            inquire_current_position_Z();
         }
 
         public void doting()
@@ -741,7 +853,62 @@ namespace trial_1
 
         }
 
-        public void sending(int moving_distance)
+
+        public void moving_in_Y_direction(double moving_distance)
+        {
+            long lStep;
+            long lstep1;
+            string s;
+
+
+            lStep = Convert.ToInt32(moving_distance / DblPulseEqui);
+            lstep1 = lStep * +1;
+            if (lstep1 > 0)
+                s = "+" + lStep.ToString();
+            else
+                s = lstep1.ToString();
+
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = true;
+            SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
+
+            // timer1.IsEnabled = true;
+            Delay(1000);
+            BlnBusy = false;
+            //  timer1.IsEnabled = false;
+        }
+
+
+
+
+        public void moving_in_X_direction(double moving_distance)
+        {
+            long lStep;
+            long lstep1;
+            string s;
+
+
+            lStep = Convert.ToInt32(moving_distance / DblPulseEqui);
+            lstep1 = lStep * +1;
+            if (lstep1 > 0)
+                s = "+" + lStep.ToString();
+            else
+                s = lstep1.ToString();
+
+            StrReceiver = "";
+            BlnBusy = true;
+            BlnSet = true;
+            SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
+
+            // timer1.IsEnabled = true;
+            Delay(1000);
+            BlnBusy = false;
+            //  timer1.IsEnabled = false;
+        }
+
+
+        public void moving_in_Z_direction(double moving_distance)
         {
             long lStep;
             long lstep1;
@@ -787,16 +954,16 @@ namespace trial_1
             StrReceiver = "";
             BlnBusy = true;
             BlnSet = true;
-          //  SendCommand("HX0\r");   //Home X axis
+           SendCommand("HX0\r");   //Home X axis
+            Delay(10000);
+            // home to Y axis
             SendCommand("HY0\r");
-
             Delay(10000);
 
+            // home to Z axis
             SendCommand("HZ0\r");
-
-
-
             Delay(100000);
+
 
             BlnBusy = false;
             inquire_current_position_X();
@@ -1077,6 +1244,21 @@ namespace trial_1
         #endregion camera
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void number_of_lines_in_X_direction_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void portnumber_TextChanged_2(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Z_position_textbox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
