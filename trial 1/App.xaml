@@ -29,7 +29,6 @@
                             </Trigger>
                             <Trigger Property="IsFocused" Value="true">
                                 <Setter Property="Background" TargetName="border"  Value="blue" />
-
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

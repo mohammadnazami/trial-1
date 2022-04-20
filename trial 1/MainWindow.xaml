@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:trial_1"
         mc:Ignorable="d"
-        Title="MainWindow" Loaded="Window_Loaded" WindowState="Minimized" ResizeMode="NoResize" MinWidth="900" Height="900" Width="1200" >
+        Title="MainWindow" Loaded="Window_Loaded" WindowState="Minimized" ResizeMode="NoResize" MinWidth="900" Height="900" Width="1300" >
     <StackPanel>
         <Grid>
             <!-- devide page to two part-->
@@ -60,12 +60,12 @@
                     </Grid>
 
 
-                   
 
 
-                    
 
-                  
+
+
+
 
 
                 </StackPanel>
@@ -103,8 +103,8 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Height="20" Content="5 &#956;m" Name="fivemicrometer_1_stepsize" Click="fivemicrometer_1_stepsize_Click" />
-                                <Button Grid.Column="1" Content="10 &#956;m" Name="tenmicrometer_2_stepsize" Click="tenmicrometer_2_stepsize_Click" />
+                                <Button Style="{StaticResource button2}" Grid.Column="0" Content="5 &#956;m" Name="fivemicrometer_1_stepsize" Click="fivemicrometer_1_stepsize_Click" />
+                                <Button Style="{StaticResource button2}" Grid.Column="1" Content="10 &#956;m" Name="tenmicrometer_2_stepsize" Click="tenmicrometer_2_stepsize_Click" />
 
                             </Grid>
                             <Grid>
@@ -112,8 +112,8 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" Height="20" Content="20 &#956;m" Name="twentymicrometer_4stepsize" Click="twentymicrometer_4stepsize_Click" />
-                                <Button Grid.Column="1" Content="40 &#956;m" Name="fortymicrometer_8stepsize" Click="fortymicrometer_8stepsize_Click"/>
+                                <Button Style="{StaticResource button2}" Grid.Column="0"  Content="20 &#956;m" Name="twentymicrometer_4stepsize" Click="twentymicrometer_4stepsize_Click" />
+                                <Button Style="{StaticResource button2}" Grid.Column="1" Content="40 &#956;m" Name="fortymicrometer_8stepsize" Click="fortymicrometer_8stepsize_Click"/>
 
                             </Grid>
 
@@ -135,12 +135,14 @@
                                     </Slider.Background>
                                 </Slider>
                             </DockPanel>
+                            <!---->
+                            <Button Style="{StaticResource button2}" Content="ok" Click="Button_Click_2"  Grid.Column="1" VerticalAlignment="Top" />
 
                         </StackPanel>
-                        
-                        
-                        
-                        
+
+
+
+
                     </Grid>
 
 
@@ -153,12 +155,12 @@
                             <ColumnDefinition Width="315*"/>
                         </Grid.ColumnDefinitions>
 
-                      
-                       
 
-                       
 
-                       
+
+
+
+
 
                     </Grid>
 
@@ -170,12 +172,11 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <!---->
-                        <Button Style="{StaticResource button2}" Content="ok" Click="Button_Click_2"  Grid.Column="1" VerticalAlignment="Top" />
+                      
 
 
                         <!-- value of step size as per recieved from machine-->
-                        <TextBox Name="speedshow" Text="0" Grid.Column="2" TextAlignment="Center" />
+                        <TextBlock Name="speedshow" Text="0" Grid.Column="2" TextAlignment="Center" />
 
                         <!--value of speed as per recieved -->
                         <TextBlock Name="stepvalueshow" Text="0" Grid.Column="0" TextAlignment="Center" />
@@ -213,10 +214,10 @@
                         </Grid.ColumnDefinitions>
 
                         <!--button for Y direction (Far) -->
-                        <Button Content="Far" Style="{StaticResource buttonarrow4}" Grid.Column="0" HorizontalAlignment="Center"  Click="Button_Click_3" FontSize="12" Margin="66,0,57,0"  />
+                        <Button Content="Far" Style="{StaticResource buttonarrow4}" Grid.Column="0" HorizontalAlignment="Center" Name="far"  Click="Button_Click_3" FontSize="12" Margin="66,0,57,0"  />
 
                         <!--button for Z direction (Up)-->
-                        <Button Content="Up" Grid.Column="1" Style="{StaticResource buttonarrow4}" HorizontalAlignment="Center" Click="Button_Click_5" FontSize="12" />
+                        <Button x:Name="up" Content="Up" Grid.Column="1" Style="{StaticResource buttonarrow4}" HorizontalAlignment="Center" Click="Button_Click_5" FontSize="12" />
 
                     </Grid>
 
@@ -237,10 +238,10 @@
                         <TextBlock Text =" - X" Grid.Column="0" FontSize="12" VerticalAlignment="Center"  />
 
                         <!--button for X direction-->
-                        <Button Content="Left" Style="{StaticResource buttonarrow}"  Click="Button_Click_6" FontSize="12" Margin="28,0,0,0"   />
+                        <Button Content="Left" Style="{StaticResource buttonarrow}" Name="left" Click="Button_Click_6" FontSize="12" Margin="28,0,0,0"   />
 
                         <!--button for plus X -->
-                        <Button Content="Right" Grid.Column="2" Style="{StaticResource buttonarrow1}" Click="Button_Click_1"  FontSize="12" HorizontalAlignment="Right" Width="39" Margin="0,0,22,0"  />
+                        <Button Content="Right" Name="right" Grid.Column="2" Style="{StaticResource buttonarrow1}" Click="Button_Click_1"  FontSize="12" HorizontalAlignment="Right" Width="39" Margin="0,0,22,0"  />
 
                         <!--text for puls X-->
                         <TextBlock Text="   + X" Grid.Column="3" FontSize="12"  VerticalAlignment="Center" Margin="5,30,0,31" HorizontalAlignment="Left" Width="57"  />
@@ -259,10 +260,10 @@
                         </Grid.ColumnDefinitions>
 
                         <!--button for minus Y -->
-                        <Button Content="Closer" Grid.Column="0" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Center"   Click="Button_Click_4" FontSize="12" Margin="64,0,59,0" RenderTransformOrigin="0.474,0.205" />
+                        <Button x:Name="closer" Content="Closer" Grid.Column="0" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Center"   Click="Button_Click_4" FontSize="12" Margin="64,0,59,0" RenderTransformOrigin="0.474,0.205" />
 
                         <!--button for minus Z-->
-                        <Button Content="Down" Grid.Column="1" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click_8" FontSize="12" Margin="61,0,47,0" />
+                        <Button x:Name="down" Content="Down" Grid.Column="1" Style="{StaticResource buttonarrow3}" HorizontalAlignment="Center"  VerticalAlignment="Top" Click="Button_Click_8" FontSize="12" Margin="61,0,47,0" />
 
                     </Grid>
 
@@ -295,13 +296,13 @@
                         </Grid.ColumnDefinitions>
 
                         <!--button for set save position-->
-                        <Button Content="reset point" Grid.Column="0"  HorizontalAlignment="Center" Name="reset_position_button" Click="reset_position_button_Click"       />
+                        <Button Style="{StaticResource button2}" Content="reset point" Grid.Column="0"  HorizontalAlignment="Center" Name="reset_position_button" Click="reset_position_button_Click" FontSize="12"      />
 
                         <!--textbox for distance between dots in X direction-->
-                        <TextBox  Grid.Column="1"  Height="18" VerticalAlignment="Top" Name="reset_position_textbox"     />
+                        <TextBox  Grid.Column="1"    Name="reset_position_textbox"     />
 
                         <!--button for set touch position-->
-                        <Button Content="touch point" Grid.Column="2"  HorizontalAlignment="Center" Name="touch_position" Click="touch_position_Click"    />
+                        <Button Style="{StaticResource button2}" Content="touch point" Grid.Column="2"  HorizontalAlignment="Center" Name="touch_position" Click="touch_position_Click" FontSize="12"   />
 
 
 
@@ -313,61 +314,61 @@
 
                     <StackPanel Background="AliceBlue" Margin="1,5,0,0">
                         <!--button for Printing -->
-                    <Button Content="printing dots" Name="printing_dots" Click="printing_dots_Click" Margin="10,10" />
+                        <Button Style="{StaticResource button2}" Content="printing dots" Name="printing_dots" Click="printing_dots_Click" Height="20" FontSize="12" />
 
-                    <!--grid for save position and touch position -->
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                        <!--grid for save position and touch position -->
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
 
-                        </Grid.ColumnDefinitions>
-
-
-                        <!--text for number of dots-->
-                        <TextBlock Text="number of dots in X" Grid.Column="0" FontSize="8"   VerticalAlignment="Center"   />
-
-                        <!--textbox for distance between dots in X direction-->
-                        <TextBox  Grid.Column="1" Name="number_of_dots_in_X_direction" Height="18" VerticalAlignment="Top"       />
+                            </Grid.ColumnDefinitions>
 
 
+                            <!--text for number of dots-->
+                            <TextBlock Text="number of dots in X" Grid.Column="0" FontSize="8"   VerticalAlignment="Center"   />
 
-                        <!--button for touch position-->
-                        <TextBlock Text="distance between dots in X direction" Grid.Column="2" FontSize="8" VerticalAlignment="Center" />
-
-                        <!--distance between dots-->
-                        <TextBox  Grid.Column="3" Name="distance_between_dots_in_X_direction" TextChanged="distance_between_dots_in_Y_direction_TextChanged" />
-                    </Grid>
-
-                   
-
-                <!--grid for Y dots and distance  -->
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-
-                        </Grid.ColumnDefinitions>
-
-
-                        <!--button for Y direction dots-->
-                        <TextBlock Text="number of dots in Y" Grid.Column="0" FontSize="8" VerticalAlignment="Center"  />
-
-                        <!--textbox for Y distance between dots-->
-                        <TextBox  Grid.Column="1" Name="number_of_dots_in_Y_direction" />
+                            <!--textbox for distance between dots in X direction-->
+                            <TextBox  Grid.Column="1" Name="number_of_dots_in_X_direction" Height="18" VerticalAlignment="Top"       />
 
 
 
-                        <!--button for touch position-->
-                        <TextBlock Text="distance between dots in Y direction" Grid.Column="2" FontSize="8"   />
+                            <!--button for touch position-->
+                            <TextBlock Text="distance between dots in X direction" Grid.Column="2" FontSize="8" VerticalAlignment="Center" />
 
-                        <!--distance between dots-->
-                        <TextBox  Grid.Column="3" Name="distance_between_dots_in_Y_direction" />
-                    </Grid>
+                            <!--distance between dots-->
+                            <TextBox  Grid.Column="3" Name="distance_between_dots_in_X_direction" TextChanged="distance_between_dots_in_Y_direction_TextChanged" />
+                        </Grid>
+
+
+
+                        <!--grid for Y dots and distance  -->
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+
+                            </Grid.ColumnDefinitions>
+
+
+                            <!--button for Y direction dots-->
+                            <TextBlock Text="number of dots in Y" Grid.Column="0" FontSize="8" VerticalAlignment="Center"  />
+
+                            <!--textbox for Y distance between dots-->
+                            <TextBox  Grid.Column="1" Name="number_of_dots_in_Y_direction" />
+
+
+
+                            <!--button for touch position-->
+                            <TextBlock Text="distance between dots in Y direction" Grid.Column="2" FontSize="8"   />
+
+                            <!--distance between dots-->
+                            <TextBox  Grid.Column="3" Name="distance_between_dots_in_Y_direction" />
+                        </Grid>
 
                     </StackPanel>
 
@@ -375,7 +376,7 @@
 
                     <StackPanel Background="AliceBlue" Margin="1,5,0,0">
                         <!--button for Printing -->
-                        <Button Content="printing lines" Name="printing_lines"  Margin="10,10" Click="printing_lines_Click" />
+                        <Button Style="{StaticResource button2}" Content="printing lines" Name="printing_lines"  Margin="10,10" Click="printing_lines_Click" FontSize="12" />
 
 
                         <Grid>
@@ -385,7 +386,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
-                               
+
                             </Grid.ColumnDefinitions>
                             <!--text for number of lines-->
                             <TextBlock Text="length of lines in X" Grid.Column="0" FontSize="8"   VerticalAlignment="Center"   />
@@ -395,7 +396,7 @@
                         </Grid>
 
 
-                       
+
 
                         <!--grid for save position and touch position -->
                         <Grid >
@@ -479,10 +480,10 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Camera " Grid.Column="1" FontSize="12" />
-                    <Button Content="connect" Grid.Column="2" Click="camera_connect" />
+                    <TextBlock Text="Camera " Grid.Column="1" FontSize="24" />
+                    <Button Style="{StaticResource button2}" Content="connect" Grid.Column="2" Click="camera_connect" />
 
-                    <Button Content="Disconnect"   Grid.Column="3" Click="Button_Click_11"  />
+                    <Button Style="{StaticResource button2}" Content="Disconnect"   Grid.Column="3" Click="Button_Click_11"  />
                     <ComboBox x:Name="comboBox"
                  
                  
@@ -493,7 +494,7 @@
                   SelectedItem="{Binding CurrentDevice}" Grid.Column="4" SelectionChanged="comboBox_SelectionChanged" />
                 </Grid>
 
-                <Image x:Name="videoPlayer" Stretch="Uniform" Width="1200" Margin="10" />
+                <Image x:Name="videoPlayer" Stretch="Fill" Width="1200" Margin="10" />
 
 
 
@@ -536,7 +537,7 @@
                     <!--postion of Z axis as recieved from machine-->
                     <TextBox x:Name="Z_position_textbox" Grid.Column="6" TextChanged="Z_position_textbox_TextChanged" BorderThickness="0" />
 
-                  
+
 
 
                 </Grid>
@@ -549,7 +550,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                 
+
 
 
 
@@ -564,7 +565,7 @@
 
                     </Grid.ColumnDefinitions>
 
-                  
+
 
 
 

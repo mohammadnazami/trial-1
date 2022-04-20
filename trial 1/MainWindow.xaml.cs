@@ -31,7 +31,7 @@ namespace trial_1
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-
+        bool btnstart;
         public DispatcherTimer timer1;
         public bool BlnConnect;                                 //Connection Status
         public static SerialPort SCPort = null;                 //Define serial port
@@ -60,12 +60,22 @@ namespace trial_1
 
         private void connect_Click(object sender, RoutedEventArgs e)
         {
-            ConnectPort(Convert.ToInt16(portnumber.Text));
+            try
+            {
 
-            //recievend position right after connecting
-            inquire_current_position_X();
-            inquire_current_position_Y();
-            inquire_current_position_Z();
+
+                ConnectPort(Convert.ToInt16(portnumber.Text));
+
+                //recievend position right after connecting
+                inquire_current_position_X();
+                inquire_current_position_Y();
+                inquire_current_position_Z();
+                BlnConnect = true;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public void ConnectPort(short sPort)
         {
@@ -107,14 +117,14 @@ namespace trial_1
                         BlnBusy = false;
                         BlnConnect = false;
                         connection_textbox.Text = "Failed to connect";
-                        MessageBox.Show("Failed to connect", "Information");
+                      //  MessageBox.Show("Failed to connect", "Information");
                         return;
                     }
                 }
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -209,9 +219,10 @@ namespace trial_1
 
 
         private void disconnect_Click(object sender, RoutedEventArgs e)
-        {
+        {   
             this.ClosePort();
             connection_textbox.Text = "disconnected";
+
         }
         public void ClosePort()
         {
@@ -256,25 +267,36 @@ namespace trial_1
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            right.IsEnabled = false;
+            if (!BlnConnect)
+            {
+                MessageBox.Show("please connect the port first!");
+                return;
+            }
+
+
             long lStep;
-            string s;
-          
+                string s;
 
-            lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
-            if (lStep > 0)
-                s = "+" + lStep.ToString();
-            else
-                s = lStep.ToString();
-            StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = true;
-            SendCommand("X" + s + "\r");   //Move X axis to the appointed position.
 
-            // timer1.IsEnabled = true;
-            Delay(10000);
-            BlnBusy = false;
-            //  timer1.IsEnabled = false;
-            inquire_current_position_X();
+                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                if (lStep > 0)
+                    s = "+" + lStep.ToString();
+                else
+                    s = lStep.ToString();
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+                SendCommand("X" + s + "\r");   //Move X axis to the appointed position.
+
+                // timer1.IsEnabled = true;
+                Delay(10000);
+
+                BlnBusy = false;
+                //  timer1.IsEnabled = false;
+                inquire_current_position_X();
+            right.IsEnabled = true;
+            
         }
 
 
@@ -308,7 +330,7 @@ namespace trial_1
 
         private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-            DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / ((Convert.ToDouble(180) * Convert.ToDouble(X_axis_stepsize.Text))), 5);
+       
          
         }
 
@@ -322,56 +344,72 @@ namespace trial_1
             sSpeed = Convert.ToInt16(speedtextbox.Text);
             if (BlnBusy == true)
             {
-                MessageBox.Show("The connection is busy, please wait.", "Information");
+             //   MessageBox.Show("The connection is busy, please wait.", "Information");
                 return;
             }
-            StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = true;
-            SendCommand("V" + sSpeed.ToString() + "\r");            //Set speed
-            Delay(100000);
-            BlnBusy = false;
-
-            StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = false;
-            SendCommand("?V\r");                                    //Inquiry speed
-            Delay(1000);
-            BlnBusy = false;
-
-            if (StrReceiver != "")
+            if (!BlnConnect)
             {
-                sSpeed = Convert.ToInt16(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
-                speedshow.Text = sSpeed.ToString();
-                stepvalueshow.Text =  DblPulseEqui.ToString();
+                MessageBox.Show("please connect the port first!");
+                return;
             }
+
+            StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+                SendCommand("V" + sSpeed.ToString() + "\r");            //Set speed
+                Delay(100000);
+                BlnBusy = false;
+
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = false;
+                SendCommand("?V\r");                                    //Inquiry speed
+                Delay(1000);
+                BlnBusy = false;
+
+                if (StrReceiver != "")
+                {
+                    sSpeed = Convert.ToInt16(System.Text.RegularExpressions.Regex.Replace(StrReceiver, @"[^0-9]+", ""));
+                    speedshow.Text = sSpeed.ToString();
+                   // stepvalueshow.Text = DblPulseEqui.ToString();
+                }
+            
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            far.IsEnabled = false;
+            if (!BlnConnect)
+            {
+                MessageBox.Show("please connect the port first!");
+                return;
+            }
+
+
             long lStep;
-            long lstep1;
-            string s;
-           
+                long lstep1;
+                string s;
 
-            lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
-            lstep1 = lStep;
-            if (lstep1 > 0)
-                s = "+" + lStep.ToString();
-            else
-                s = lstep1.ToString();
 
-            StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = true;
-            SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
-            
-           // timer1.IsEnabled = true;
-            Delay(1000);
-            BlnBusy = false;
-            //  timer1.IsEnabled = false;
+                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                lstep1 = lStep;
+                if (lstep1 > 0)
+                    s = "+" + lStep.ToString();
+                else
+                    s = lstep1.ToString();
 
-            inquire_current_position_Y();
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+                SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
+
+                // timer1.IsEnabled = true;
+                Delay(10000);
+                BlnBusy = false;
+                //  timer1.IsEnabled = false;
+
+                inquire_current_position_Y();
+            far.IsEnabled = true;
             
         }
        
@@ -382,30 +420,39 @@ namespace trial_1
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
+            closer.IsEnabled = false;
+            if (!BlnConnect)
+            {
+                MessageBox.Show("please connect the port first!");
+                return;
+            }
+
+
             long lStep;
-            long lstep1;
-            string s;
+                long lstep1;
+                string s;
 
 
-            lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
-            lstep1 = lStep * -1;
-            if (lstep1 > 0)
-                s = "+" + lStep.ToString();
-            else
-                s = lstep1.ToString();
+                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                lstep1 = lStep * -1;
+                if (lstep1 > 0)
+                    s = "+" + lStep.ToString();
+                else
+                    s = lstep1.ToString();
 
-            StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = true;
-            SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+                SendCommand("Y" + s + "\r");   //Move X axis to the appointed position.
 
-            // timer1.IsEnabled = true;
-            Delay(1000);
-            BlnBusy = false;
-            //  timer1.IsEnabled = false;
+                // timer1.IsEnabled = true;
+                Delay(10000);
+                BlnBusy = false;
+                //  timer1.IsEnabled = false;
 
-            inquire_current_position_Y();
-
+                inquire_current_position_Y();
+            closer.IsEnabled = true;
+            
         }
 
         private void torun_textbox_TextChanged(object sender, TextChangedEventArgs e)
@@ -426,69 +473,101 @@ namespace trial_1
         
         private void stop_Click(object sender, RoutedEventArgs e)
         {
+            if (BlnBusy == true)
+            {
+                MessageBox.Show("The connection is busy, please wait.", "Information");
+                return;
+            }
+            if (!BlnConnect)
+            {
+                MessageBox.Show("please connect the port first!");
+                return;
+            }
+
+
             StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = true;
-            SendCommand("S\r");   //Stop moving
-            Delay(10000);
-            //                  timer1.IsEnabled = false;
-            BlnStopCommand = true;
-            //DelayWait(500);
-            BlnBusy = false;
+                BlnBusy = true;
+                BlnSet = true;
+                SendCommand("S\r");   //Stop moving
+                Delay(10000);
+                //                  timer1.IsEnabled = false;
+                BlnStopCommand = true;
+                //DelayWait(500);
+                BlnBusy = false;
+            
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
+            up.IsEnabled = false;
+            if (!BlnConnect)
+            {
+                MessageBox.Show("please connect the port first!");
+                return;
+            }
+
+
             long lStep;
-            long lstep1;
-            string s;
-           
+                long lstep1;
+                string s;
 
-            lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
-            lstep1 = lStep * -1;
-            if (lstep1 > 0)
-                s = "+" + lstep1.ToString();
-            else
-                s = lstep1.ToString();
-            StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = true;
-            SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
 
-            // timer1.IsEnabled = true;
-            Delay(10000);
-            BlnBusy = false;
-            //  timer1.IsEnabled = false;
+                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                lstep1 = lStep * -1;
+                if (lstep1 > 0)
+                    s = "+" + lstep1.ToString();
+                else
+                    s = lstep1.ToString();
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+                SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
 
-            inquire_current_position_Z();
+                // timer1.IsEnabled = true;
+                Delay(10000);
+                BlnBusy = false;
+                //  timer1.IsEnabled = false;
+
+                inquire_current_position_Z();
+            up.IsEnabled = true;
         }
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
+            left.IsEnabled = false;
+            if (!BlnConnect)
+            {
+                MessageBox.Show("please connect the port first!");
+                return;
+            }
+
+
+
             touchposition();
-            long lStep;
-            long lstep1;
-            string s;
+                long lStep;
+                long lstep1;
+                string s;
 
-            
-            lStep = Convert.ToInt32((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
-            lstep1 = lStep * -1;
-            if (lstep1 > 0)
-                s = "+" + lStep.ToString();
-            else
-                s = lstep1.ToString();
 
-            StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = true;
-            SendCommand("X" + s + "\r");   //Move X axis to the appointed position.
+                lStep = Convert.ToInt32((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                lstep1 = lStep * -1;
+                if (lstep1 > 0)
+                    s = "+" + lStep.ToString();
+                else
+                    s = lstep1.ToString();
 
-            // timer1.IsEnabled = true;
-            Delay(1000);
-            BlnBusy = false;
-            //  timer1.IsEnabled = false;
-            resetpostion();
-            inquire_current_position_X();
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+                SendCommand("X" + s + "\r");   //Move X axis to the appointed position.
+
+                // timer1.IsEnabled = true;
+                Delay(10000);
+                BlnBusy = false;
+                //  timer1.IsEnabled = false;
+                resetpostion();
+                inquire_current_position_X();
+            left.IsEnabled = true;
         }
 
         private void connection_textbox_TextChanged_1(object sender, TextChangedEventArgs e)
@@ -503,29 +582,39 @@ namespace trial_1
 
         private void Button_Click_8(object sender, RoutedEventArgs e)
         {
+            down.IsEnabled = true;
+            if (!BlnConnect)
+            {
+                MessageBox.Show("please connect the port first!");
+                return;
+            }
+
+
             long lStep;
-            long lstep1;
-            string s;
+                long lstep1;
+                string s;
 
 
-            lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
-            lstep1 = lStep;
-            if (lstep1 > 0)
-                s = "+" + lstep1.ToString();
-            else
-                s = lstep1.ToString();
+                lStep = Convert.ToInt16((Convert.ToDouble(torun_textbox.Text)) / DblPulseEqui);
+                lstep1 = lStep;
+                if (lstep1 > 0)
+                    s = "+" + lstep1.ToString();
+                else
+                    s = lstep1.ToString();
 
-            StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = true;
-            SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+                SendCommand("Z" + s + "\r");   //Move X axis to the appointed position.
 
-            // timer1.IsEnabled = true;
-            Delay(10000);
-            BlnBusy = false;
-            //  timer1.IsEnabled = false;
+                // timer1.IsEnabled = true;
+                Delay(10000);
+                BlnBusy = false;
+                //  timer1.IsEnabled = false;
 
-            inquire_current_position_Z();
+                inquire_current_position_Z();
+            down.IsEnabled = true;
+            
 
         }
 
@@ -649,6 +738,11 @@ namespace trial_1
 
         private void printing_dots_Click(object sender, RoutedEventArgs e)
         {
+            if (!BlnConnect)
+            {
+                MessageBox.Show("please connect the port first!");
+                return;
+            }
             double reseting_point = x_save_position;
             double touching_point = x_touch_position;
 
@@ -727,6 +821,11 @@ namespace trial_1
 
         private void printing_lines_Click(object sender, RoutedEventArgs e)
         {
+            if (!BlnConnect)
+            {
+                MessageBox.Show("please connect the port first!");
+                return;
+            }
             double reseting_point = x_save_position;
             double touching_point = x_touch_position;
 
@@ -950,48 +1049,56 @@ namespace trial_1
 
         private void Zero_XYZ_Click(object sender, RoutedEventArgs e)
         {
-
-            StrReceiver = "";
-            BlnBusy = true;
-            BlnSet = true;
-           SendCommand("HX0\r");   //Home X axis
-            Delay(10000);
-            // home to Y axis
-            SendCommand("HY0\r");
-            Delay(10000);
-
-            // home to Z axis
-            SendCommand("HZ0\r");
-            Delay(100000);
+            if (BlnBusy == true)
+            {
+                MessageBox.Show("The connection is busy, please wait.", "Information");
+                return;
+            }
+            if (BlnConnect)
+            {
 
 
-            BlnBusy = false;
-            inquire_current_position_X();
-            inquire_current_position_Y();
-            inquire_current_position_Z();
+                StrReceiver = "";
+                BlnBusy = true;
+                BlnSet = true;
+                SendCommand("HX0\r");   //Home X axis
+                Delay(10000);
+                // home to Y axis
+                SendCommand("HY0\r");
+                Delay(10000);
+
+                // home to Z axis
+                SendCommand("HZ0\r");
+                Delay(100000);
+
+
+                BlnBusy = false;
+                inquire_current_position_X();
+                inquire_current_position_Y();
+                inquire_current_position_Z();
+            }
         }
 
         private void position_Click(object sender, RoutedEventArgs e)
         {
-            inquire_current_position_X();
-            inquire_current_position_Y();
-            inquire_current_position_Z();
+            if (!BlnConnect)
+            {
+                MessageBox.Show("please connect the port first!");
+                return;
+            }
+            if (BlnBusy == true)
+            {
+                MessageBox.Show("The connection is busy, please wait.", "Information");
+                return;
+            }
+           
+                inquire_current_position_X();
+                inquire_current_position_Y();
+                inquire_current_position_Z();
+            
         }
 
-        private void position_X_Click(object sender, RoutedEventArgs e)
-        {
-            inquire_current_position_X();
-        }
-
-        private void position_Y_Click(object sender, RoutedEventArgs e)
-        {
-            inquire_current_position_Y();
-        }
-
-        private void postion_Z_Click(object sender, RoutedEventArgs e)
-        {
-            inquire_current_position_Z();
-        }
+       
 
        public void inquire_current_position_X()
         {
@@ -1088,6 +1195,7 @@ namespace trial_1
 
         private void reset_position_button_Click(object sender, RoutedEventArgs e)
         {
+           
             reset_position_textbox.Text = Z_position_textbox.Text;
         }
 
@@ -1265,26 +1373,66 @@ namespace trial_1
 
         private void fivemicrometer_1_stepsize_Click(object sender, RoutedEventArgs e)
         {
-            DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / (180), 5);
-            stepvalueshow.Text = "step size is 5 micro meter";
+            if (BlnBusy == true)
+            {
+                MessageBox.Show("The connection is busy, please wait.", "Information");
+                return;
+            }
+            if (BlnConnect)
+            {
+
+
+                DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / (180), 5);
+                stepvalueshow.Text = "step size is 5 micro meter";
+            }
         }
 
         private void tenmicrometer_2_stepsize_Click(object sender, RoutedEventArgs e)
         {
-            DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / ((Convert.ToDouble(180) * Convert.ToDouble(2))), 5);
-            stepvalueshow.Text = "stepsize is ten micro meter";
+            if (BlnBusy == true)
+            {
+                MessageBox.Show("The connection is busy, please wait.", "Information");
+                return;
+            }
+            if (BlnConnect)
+            {
+
+
+                DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / ((Convert.ToDouble(180) * Convert.ToDouble(2))), 5);
+                stepvalueshow.Text = "stepsize is ten micro meter";
+            }
         }
 
         private void twentymicrometer_4stepsize_Click(object sender, RoutedEventArgs e)
         {
-            DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / ((Convert.ToDouble(180) * Convert.ToDouble(4))), 5);
-            stepvalueshow.Text = "step size is 20 micro meter";
+            if (BlnBusy == true)
+            {
+                MessageBox.Show("The connection is busy, please wait.", "Information");
+                return;
+            }
+            if (BlnConnect)
+            {
+
+
+                DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / ((Convert.ToDouble(180) * Convert.ToDouble(4))), 5);
+                stepvalueshow.Text = "step size is 20 micro meter";
+            }
         }
 
         private void fortymicrometer_8stepsize_Click(object sender, RoutedEventArgs e)
         {
-            DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / ((Convert.ToDouble(180) * Convert.ToDouble(8))), 5);
-            stepvalueshow.Text = "stepsize is 40 micro meter";
+            if (BlnBusy == true)
+            {
+                MessageBox.Show("The connection is busy, please wait.", "Information");
+                return;
+            }
+            if (BlnConnect)
+            {
+
+
+                DblPulseEqui = Math.Round(Convert.ToDouble(1.8) / ((Convert.ToDouble(180) * Convert.ToDouble(8))), 5);
+                stepvalueshow.Text = "stepsize is 40 micro meter";
+            }
         }
     }
 }
