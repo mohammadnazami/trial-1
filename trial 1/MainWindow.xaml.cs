@@ -173,7 +173,7 @@ namespace trial_1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to receive data", "Information");
+             //   MessageBox.Show("Failed to receive data", "Information");
             }
         }
 

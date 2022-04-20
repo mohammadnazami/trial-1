@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:trial_1"
         mc:Ignorable="d"
-        Title="MainWindow" Loaded="Window_Loaded" WindowState="Minimized" ResizeMode="NoResize" MinWidth="900" Height="900" Width="1300" >
+        Title="MainWindow" Loaded="Window_Loaded" WindowState="Minimized" ResizeMode="NoResize" MinWidth="900" Height="700" Width="1200" >
     <StackPanel>
         <Grid>
             <!-- devide page to two part-->
@@ -182,11 +182,7 @@
                         <TextBlock Name="stepvalueshow" Text="0" Grid.Column="0" TextAlignment="Center" />
                     </Grid>
 
-                    <!-- stop button-->
-                    <Button Style="{StaticResource button2}" Content="stop" Name="stop" Click="stop_Click"  Grid.ColumnSpan="2"    />
-
-                    <!--zero to XYZ-->
-                    <Button Content="Zero XYZ" Grid.Column="2" Style="{StaticResource button2}" VerticalAlignment="Bottom" Name="Zero_XYZ"  Click="Zero_XYZ_Click" Height="20" FontSize="10" />
+                  
 
                 </StackPanel>
 
@@ -480,10 +476,10 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Camera " Grid.Column="1" FontSize="24" />
-                    <Button Style="{StaticResource button2}" Content="connect" Grid.Column="2" Click="camera_connect" />
+                    <TextBlock Text="Camera " Grid.Column="0" FontSize="24" />
+                    <Button Style="{StaticResource button2}" Content="connect" Grid.Column="1" Click="camera_connect" />
 
-                    <Button Style="{StaticResource button2}" Content="Disconnect"   Grid.Column="3" Click="Button_Click_11"  />
+                    <Button Style="{StaticResource button2}" Content="Disconnect"   Grid.Column="2" Click="Button_Click_11"  />
                     <ComboBox x:Name="comboBox"
                  
                  
@@ -491,10 +487,17 @@
                   VerticalAlignment="Top"
                   DisplayMemberPath="Name"
                   ItemsSource="{Binding VideoDevices}"
-                  SelectedItem="{Binding CurrentDevice}" Grid.Column="4" SelectionChanged="comboBox_SelectionChanged" />
+                  SelectedItem="{Binding CurrentDevice}" Grid.Column="3" SelectionChanged="comboBox_SelectionChanged" />
+
+                    <!-- stop button-->
+                    <Button Style="{StaticResource button2}" Content="stop" Name="stop" Click="stop_Click"  Grid.Column="4" Foreground="Red" />
+
+                    <!--zero to XYZ-->
+                    <Button Content="Zeros XYZ" Grid.Column="5" Style="{StaticResource button2}"  Name="Zero_XYZ"  Click="Zero_XYZ_Click" />
+
                 </Grid>
 
-                <Image x:Name="videoPlayer" Stretch="Fill" Width="1200" Margin="10" />
+                <Image x:Name="videoPlayer" Stretch="Fill" Width="1000" Margin="10" />
 
 
 
