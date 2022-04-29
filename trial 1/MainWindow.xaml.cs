@@ -1291,8 +1291,9 @@ namespace trial_1
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Error on _videoSource_NewFrame:\n" + exc.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                StopCamera();
+                //   MessageBox.Show("Error on _videoSource_NewFrame:\n" + exc.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //   StopCamera();
+                return;
             }
         }
 
